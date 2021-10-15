@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  /* acfix-today */
+  /* colors: cyan, teal, rose, yellow */
+  .acfix-logo {
+    @apply text-base font-extrabold bg-gradient-to-r from-teal-500 to-cyan-500 bg-clip-text text-transparent;
+  }
+}
