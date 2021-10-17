@@ -1,3 +1,4 @@
+import { ChevronRightIcon } from "@heroicons/react/outline";
 import { GatsbyImage } from "gatsby-plugin-image";
 import React from "react";
 import { formatPhoneNumber } from "../utils/formatPhoneNumber";
@@ -28,7 +29,9 @@ export const Hero = () => {
                 />
               </div>
               <div className="ml-3">
-                <p className="text-xs text-gray-700 max-w-xs">{testimonial}</p>
+                <p className="text-xs text-gray-700 max-w-xs font-medium">
+                  {testimonial}
+                </p>
               </div>
             </div>
           </div>
@@ -91,8 +94,34 @@ export const Hero = () => {
                   {nearYouHeroText}
                 </h1>
               </div>
-              <div className="mt-12 sm:max-w-lg sm:w-full sm:flex">
-                {/* here you should use the ZIPCODE component */}
+              <div className="mt-12 w-full">
+                <form
+                  action="#"
+                  method="POST"
+                  className="mt-3 inline-flex flex-col"
+                >
+                  <label
+                    htmlFor="zipcode"
+                    className="block text-sm font-medium text-blueGray-800"
+                  >
+                    Enter your zip code to start
+                  </label>
+                  <div className="mt-1 inline-flex">
+                    <input
+                      type="text"
+                      name="zipcode"
+                      id="zipcode"
+                      className="block w-full py-3 text-base rounded-md placeholder-blueGray-500 shadow-sm focus:ring-cyan-500 focus:border-cyan-500 border-blueGray-300"
+                      placeholder="e.g. 33014"
+                    />
+                    <button
+                      type="submit"
+                      className="mt-3 w-full px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blueGray-800 shadow-sm hover:bg-blueGray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500 sm:mt-0 sm:ml-3 sm:flex-shrink-0 sm:inline-flex sm:items-center sm:w-auto"
+                    >
+                      Search <ChevronRightIcon className="w-5 h-5" />
+                    </button>
+                  </div>
+                </form>
               </div>
             </div>
           </div>

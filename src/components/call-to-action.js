@@ -13,22 +13,25 @@ export const CallToAction = () => {
         <div className="max-w-xl">
           <h2 className="text-3xl font-extrabold tracking-tight text-white sm:text-5xl">
             <span className="block">{header}</span>
-            <span className="mt-2 lock text-rose-500">{subheader}</span>
+            <span className="mt-2 lock text-cyan-500">{subheader}</span>
           </h2>
         </div>
 
         <div className="mt-8 flex lg:mt-0 lg:flex-shrink-0">
-          <div className="flex flex-col rounded-md shadow">
-            <Link
-              to="/quiz-conversion"
-              className="inline-flex items-center px-6 py-5 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-cyan-600 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500"
-            >
-              There is no cost to try
-              <ArrowRightIcon
-                className="ml-3 -mr-1 h-5 w-5"
-                aria-hidden="true"
-              />
-            </Link>
+          <div className="grid gap-8 items-start justify-center">
+            <div className="relative group">
+              <div className="px-6 py-5 absolute -inset-0.5 bg-gradient-to-r from-cyan-500 to-yellow-500 rounded-xl filter blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-tilt" />
+              <Link
+                to="/quiz-conversion"
+                className="relative px-6 py-5 bg-blueGray-800 rounded-xl leading-none flex items-center text-white group-hover:text-cyan-300 transition duration-200"
+              >
+                It&apos; absolutely free
+                <ArrowRightIcon
+                  className="ml-3 -mr-1 h-5 w-5 inline-flex items-center justify-center"
+                  aria-hidden="true"
+                />
+              </Link>
+            </div>
             <p className="ml-1 mt-3 text-xs text-gray-400 font-semibold tracking-wide">
               No risk. No obligation
             </p>
