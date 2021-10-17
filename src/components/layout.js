@@ -1,3 +1,4 @@
+import { Footer } from "./footer";
 import { Helmet } from "react-helmet";
 import { Navigation } from "./navigation";
 import PropTypes from "prop-types";
@@ -21,6 +22,7 @@ const Layout = ({ children }) => {
       <main>
         <Navigation />
         {children}
+        <Footer />
       </main>
     </>
   );

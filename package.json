@@ -38,6 +38,8 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.3.7",
+    "babel-eslint": "^10.1.0",
+    "eslint-config-react-app": "^6.0.0",
     "gatsby-plugin-postcss": "^4.14.0",
     "postcss": "^8.3.9",
     "tailwindcss": "^2.2.17"

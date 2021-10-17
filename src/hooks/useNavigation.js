@@ -3,7 +3,7 @@ import { graphql, useStaticQuery } from "gatsby";
 export const useNavigation = () => {
   const data = useStaticQuery(graphql`
     {
-      contentfulNavigation(logo: { eq: "ACFIX.TODAY" }) {
+      contentfulNavigation(leadType: { eq: "hvac" }) {
         id
         motto
         logo
