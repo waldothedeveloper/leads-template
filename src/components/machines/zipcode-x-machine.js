@@ -15,7 +15,7 @@ export const stepMachine = createMachine(
       //! # 2 zipcode
       idle: {
         on: {
-          NEXT: { target: "verified", cond: (ctx, _) => ctx.address },
+          NEXT: { target: "verified", cond: "verifiedZipCode" },
           //! User can always change zip code in this state
           EDIT_ZIPCODE: {
             actions: ["assignZipCodeToContext"],
@@ -75,6 +75,7 @@ export const stepMachine = createMachine(
         },
       },
       verified: {
+        entry: () => console.log("ENTERED VERIFIED FINAL STATE"),
         type: "final",
       },
     },
@@ -133,6 +134,7 @@ export const stepMachine = createMachine(
     guards: {
       regexZipCode: (ctx) =>
         ctx.verifiedAddress !== null && zipCodeRegex.test(ctx.zipcode),
+      verifiedZipCode: (ctx, _) => ctx.address,
     },
   }
 );

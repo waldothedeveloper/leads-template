@@ -1,5 +1,7 @@
+import { useCallback, useEffect } from "react";
+
+import { navigate } from "gatsby-link";
 import { stepMachine } from "../components/machines/zipcode-x-machine";
-import { useCallback } from "react";
 import { useMachine } from "@xstate/react";
 
 export const useZipCode = () => {
@@ -9,6 +11,12 @@ export const useZipCode = () => {
     current.context.address !== null &&
     Object.keys(current.context.address).length > 0;
 
+  useEffect(() => {
+    if (current.matches("verified")) {
+      navigate("/quiz-conversion");
+    }
+  }, [current]);
+
   const handleChange = useCallback(
     (event) => {
       const { value } = event.target;
@@ -17,12 +25,14 @@ export const useZipCode = () => {
     [send]
   );
 
-  const handleSubmit = useCallback((event) => {
-    console.log("submitting the form");
-    if (event) event.preventDefault();
-    // send("NEXT");
-    // save to database ?
-  }, []);
+  const handleSubmit = useCallback(
+    (event) => {
+      if (event) event.preventDefault();
+
+      send("NEXT");
+    },
+    [send]
+  );
 
   return { handleChange, handleSubmit, error, success, current };
 };

@@ -11,7 +11,7 @@ export const InputControl = ({ current, handleChange, error, success }) => {
           maxLength={5}
           value={current?.context?.zipcode || ""}
           onChange={handleChange}
-          type="text"
+          type="number"
           name="zipcode"
           id="zipcode"
           className={
