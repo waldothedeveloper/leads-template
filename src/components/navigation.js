@@ -13,7 +13,7 @@ export const Navigation = () => {
   //
   return (
     <header>
-      <Popover className="relative bg-white">
+      <Popover className="relative bg-blueGray-100">
         <div className="flex justify-between items-center max-w-7xl mx-auto px-4 py-6 sm:px-6 md:space-x-10 lg:px-8 md:bg-blueGray-800 rounded-b-3xl">
           <div className="flex justify-start lg:w-0 lg:flex-1">
             <Link

@@ -84,11 +84,7 @@ export const HowWeProtectDetails = () => {
 
           <div className="mt-8">
             <h3 className="text-lg font-medium">
-              <div className="focus:outline-none">
-                {/* Extend touch target to entire panel */}
-                <span className="absolute inset-0" aria-hidden="true" />
-                {action.title}
-              </div>
+              <div className="focus:outline-none">{action.title}</div>
             </h3>
             <p className="mt-2 text-sm text-gray-500">{action.description}</p>
           </div>

@@ -23,7 +23,7 @@ export const CallToAction = () => {
               <div className="px-6 py-5 absolute -inset-0.5 bg-gradient-to-r from-cyan-500 to-yellow-500 rounded-xl filter blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-tilt" />
               <Link
                 to="/quiz-conversion"
-                className="relative px-6 py-5 bg-blueGray-800 rounded-xl leading-none flex items-center text-white group-hover:text-cyan-300 transition duration-200"
+                className="relative px-6 py-5 bg-blueGray-800 rounded-xl leading-none flex items-center text-white group-hover:text-cyan-500 transition duration-200"
               >
                 It&apos; absolutely free
                 <ArrowRightIcon
