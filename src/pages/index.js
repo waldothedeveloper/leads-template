@@ -1,6 +1,6 @@
 import { CallToAction } from "../components/call-to-action";
 import { FeaturedTestimonial } from "../components/featured-testimonial";
-import { Hero } from "../components/hero";
+import { Hero } from "../components/hero-section/hero";
 import { HowItWorks } from "../components/how-it-works";
 import { HowWeProtect } from "../components/how-we-protect";
 import Layout from "../components/layout";
