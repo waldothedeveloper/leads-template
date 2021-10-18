@@ -1,6 +1,6 @@
 import React from "react";
-import { actions } from "../utils/actions";
-import { classNames } from "../utils/classNames";
+import { actions } from "../../utils/actions";
+import { classNames } from "../../utils/classNames";
 
 export const HowWeProtectDetails = () => {
   return (

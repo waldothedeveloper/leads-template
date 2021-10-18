@@ -1,6 +1,6 @@
-import { Footer } from "./footer";
+import { Footer } from "./navigation/footer";
+import { Header } from "./navigation/header";
 import { Helmet } from "react-helmet";
-import { Navigation } from "./navigation";
 import PropTypes from "prop-types";
 import React from "react";
 
@@ -20,7 +20,7 @@ const Layout = ({ children }) => {
       </Helmet>
 
       <main>
-        <Navigation />
+        <Header />
         {children}
         <Footer />
       </main>

@@ -11,7 +11,7 @@ export const useZipCode = () => {
 
   const handleChange = useCallback(
     (event) => {
-      const value = event.target.value;
+      const { value } = event.target;
       send("EDIT_ZIPCODE", { value });
     },
     [send]

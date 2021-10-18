@@ -3,11 +3,11 @@ import { Popover, Transition } from "@headlessui/react";
 import React, { Fragment } from "react";
 
 import { Link } from "gatsby";
-import { formatPhoneNumber } from "../utils/formatPhoneNumber";
-import { logoIcon } from "../utils/logoIcon";
-import { useNavigation } from "../hooks/useNavigation";
+import { formatPhoneNumber } from "../../utils/formatPhoneNumber";
+import { logoIcon } from "../../utils/logoIcon";
+import { useNavigation } from "../../hooks/useNavigation";
 
-export const Navigation = () => {
+export const Header = () => {
   const { logo, phoneNumber, motto } = useNavigation();
 
   //
