@@ -87,7 +87,7 @@ export const stepMachine = createMachine(
       assignErrorMessageToContext: assign((_, event) => {
         const _a = event.data;
 
-        if (_a === null || typeof _a === undefined) {
+        if (_a === null || typeof _a === "undefined") {
           return {
             errorMessage: null,
           };
