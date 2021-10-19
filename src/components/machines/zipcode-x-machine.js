@@ -75,7 +75,6 @@ export const stepMachine = createMachine(
         },
       },
       verified: {
-        entry: () => console.log("ENTERED VERIFIED FINAL STATE"),
         type: "final",
       },
     },
@@ -117,8 +116,13 @@ export const stepMachine = createMachine(
         };
       }),
       validateZipCodeAndSaveToContext: assign((ctx, event) => {
-        if (Object.keys(event.data).length > 0) {
+        if (
+          Object.keys(event.data).length > 0 &&
+          event.data[ctx.zipcode] &&
+          event.data[ctx.zipcode][0].state === "Florida"
+        ) {
           const { city, state, postal_code } = event.data[ctx.zipcode][0];
+
           return {
             address: {
               city,
@@ -126,8 +130,9 @@ export const stepMachine = createMachine(
               postal_code,
             },
           };
+        } else {
+          return null;
         }
-        return null;
       }),
     },
 

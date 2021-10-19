@@ -40,5 +40,22 @@ module.exports = {
       },
       __key: "images",
     },
+    {
+      resolve: `gatsby-source-airtable`,
+      options: {
+        apiKey: process.env.AIRTABLE_KEY,
+        concurrency: 5,
+        tables: [
+          {
+            baseId: `appu58oGEV91DsZ2q`,
+            tableName: `ACFIX-template`,
+          },
+          {
+            baseId: `appu58oGEV91DsZ2q`,
+            tableName: `ACFIX-dev`,
+          },
+        ],
+      },
+    },
   ],
 };

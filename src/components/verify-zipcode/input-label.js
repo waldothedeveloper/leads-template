@@ -16,9 +16,9 @@ export const InputLabel = ({ success, error }) => {
       )}
     >
       {success
-        ? "That's about right!"
+        ? "Yes, we support Florida!"
         : error
-        ? "Hmm...let's check that again"
+        ? "Sorry, for now we support only Florida"
         : "Enter your zip code to start"}
     </label>
   );

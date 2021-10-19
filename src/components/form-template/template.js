@@ -2,7 +2,12 @@ import { LargeScreenStepper } from "./large-screen-stepper";
 import { MobileStepper } from "./mobile-stepper";
 import React from "react";
 import { WizardCard } from "./wizard-card";
+import { useFormMachine } from "../machines/form-machine";
+
 export const FormTemplate = () => {
+  const formMachine = useFormMachine();
+
+  //
   return (
     <div className="bg-blueGray-100 min-h-screen overflow-hidden">
       <div className="max-w-screen-2xl mx-auto px-4 py-6 flex items-center justify-center">
