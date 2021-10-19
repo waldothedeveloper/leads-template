@@ -9,8 +9,8 @@ import { YellowBlow } from "./yellow-blob";
 export const Card = () => {
   return (
     <div className="xl:mt-12">
-      {[1].map((_, idx) => (
-        <div key={idx} className="flex flex-col overflow-hidden">
+      {[{ id: 0 }].map((roll) => (
+        <div key={roll.id} className="flex flex-col overflow-hidden">
           <div className="flex-1 px-2.5 py-3 md:py-6 xl:p-6 flex flex-col justify-between mx-auto">
             <div className="flex-1 w-full">
               {/* yellow blob only for sm viewports */}

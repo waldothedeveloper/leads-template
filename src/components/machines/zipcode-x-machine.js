@@ -130,8 +130,6 @@ export const stepMachine = createMachine(
               postal_code,
             },
           };
-        } else {
-          return null;
         }
       }),
     },

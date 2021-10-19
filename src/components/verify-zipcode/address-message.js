@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React from "react";
 
 export const AddressMessage = ({ success, current }) => {
@@ -10,4 +11,9 @@ export const AddressMessage = ({ success, current }) => {
       </p>
     )
   );
+};
+
+AddressMessage.propTypes = {
+  success: PropTypes.bool,
+  current: PropTypes.object,
 };
