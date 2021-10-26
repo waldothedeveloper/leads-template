@@ -51,27 +51,17 @@ export const options = {
       const totalOfQuestions = Object.keys(ctx.data).length;
 
       if (currentQuestionNumber < totalOfQuestions) {
-        if (
-          ctx.data[`quiz${currentQuestionNumber + 1}`].response?.postal_code
-        ) {
-          return (ctx.currentQuiz += 2);
-        } else if (ctx.data[`quiz${currentQuestionNumber}`].optional) {
-          return (ctx.currentQuiz += 1);
+        if (ctx.data[`quiz${currentQuestionNumber}`].optional) {
+          ctx.currentQuiz += 1;
         } else if (ctx.data[`quiz${currentQuestionNumber}`].response) {
-          return (ctx.currentQuiz += 1);
+          ctx.currentQuiz += 1;
         }
       }
     }),
     prevQuestion: assign((ctx, event) => {
       if (event.type !== "PREV") return {};
-      const currentQuestionNumber = ctx.currentQuiz;
 
-      if (ctx.currentQuiz > 1) {
-        return ctx.data[`quiz${currentQuestionNumber - 1}`].response
-          ?.postal_code
-          ? (ctx.currentQuiz -= 2)
-          : (ctx.currentQuiz -= 1);
-      }
+      if (ctx.currentQuiz > 1) ctx.currentQuiz -= 1;
     }),
   },
 };

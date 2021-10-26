@@ -61,9 +61,9 @@ export const RadioType = ({ currentQuestion, send }) => {
             {currentQuestion.question}
           </RadioGroup.Label>
           <div className="scrollbar space-y-2 h-56 overflow-y-auto overflow-x-hidden pt-3 pb-8 px-3">
-            {currentQuestion.choices.map((elem) => (
+            {currentQuestion.choices.map((elem, idx) => (
               <RadioGroup.Option
-                key={elem.id}
+                key={idx}
                 value={elem}
                 className={handleActiveChecked}
               >
