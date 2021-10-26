@@ -20,4 +20,16 @@
   .idle {
     @apply block w-full pr-10 border-blueGray-300 text-blueGray-900 placeholder-blueGray-300 focus:outline-none focus:ring-blueGray-500 focus:border-blueGray-500 text-xl rounded-md;
   }
+
+  .errorClass {
+    @apply border-2 border-red-500 rounded-lg px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-red-600 focus-within:border-red-600;
+  }
+  ,
+  .successClass {
+    @apply border-2 border-cyan-500 rounded-lg px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-cyan-600 focus-within:border-cyan-600;
+  }
+  ,
+  .idleClass {
+    @apply border-2 border-gray-700 rounded-lg px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-gray-600 focus-within:border-gray-600;
+  }
 }

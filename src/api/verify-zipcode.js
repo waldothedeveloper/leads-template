@@ -17,7 +17,6 @@ const verifyZipcode = async (req, res) => {
 
     return res.status(200).json(result);
   } catch (error) {
-    console.log("error checking the ZIPCODE: ", error);
     return res.status(500).send(error);
   }
 };

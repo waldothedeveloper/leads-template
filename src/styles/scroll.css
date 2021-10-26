@@ -1,0 +1,9 @@
+.scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+/* Handle */
+.scrollbar::-webkit-scrollbar-thumb {
+  background: #94a3b8;
+  border-radius: 10px;
+}

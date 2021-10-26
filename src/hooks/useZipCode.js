@@ -11,11 +11,13 @@ export const useZipCode = () => {
     current.context.address !== null &&
     Object.keys(current.context.address).length > 0;
 
+  const { address } = current.context;
+
   useEffect(() => {
     if (current.matches("verified")) {
-      navigate("/quiz-conversion");
+      navigate("/quiz-conversion", { state: { address } });
     }
-  }, [current]);
+  }, [current, address]);
 
   const handleChange = useCallback(
     (event) => {

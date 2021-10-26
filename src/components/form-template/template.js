@@ -1,22 +1,35 @@
-import { LargeScreenStepper } from "./large-screen-stepper";
-import { MobileStepper } from "./mobile-stepper";
+import { InputStates } from "./input-states";
+import { InputType } from "./input-type";
+import PropTypes from "prop-types";
+import { RadioType } from "./radio-type";
 import React from "react";
+import { TextArea } from "./textarea-type";
 import { WizardCard } from "./wizard-card";
-import { useFormMachine } from "../machines/form-machine";
 
-export const FormTemplate = () => {
-  const formMachine = useFormMachine();
-
+export const FormTemplate = ({ send, currentQuestion, stateMachine }) => {
   //
   return (
-    <div className="bg-blueGray-100 min-h-screen overflow-hidden">
-      <div className="max-w-screen-2xl mx-auto px-4 py-6 flex items-center justify-center">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 place-items-center place-content-center">
-          <MobileStepper />
-          <LargeScreenStepper />
-          <WizardCard />
-        </div>
-      </div>
+    <div className="grid grid-cols-1 gap-6 place-items-center place-content-center">
+      <WizardCard send={send} currentQuestion={currentQuestion}>
+        {currentQuestion.type === "radio" ? (
+          <RadioType currentQuestion={currentQuestion} send={send} />
+        ) : currentQuestion.type === "textarea" ? (
+          <TextArea send={send} currentQuestion={currentQuestion} />
+        ) : (
+          <InputType currentQuestion={currentQuestion} send={send}>
+            <InputStates
+              currentQuestion={currentQuestion}
+              stateMachine={stateMachine}
+            />
+          </InputType>
+        )}
+      </WizardCard>
     </div>
   );
+};
+
+FormTemplate.propTypes = {
+  send: PropTypes.func.isRequired,
+  currentQuestion: PropTypes.object.isRequired,
+  stateMachine: PropTypes.object.isRequired,
 };
