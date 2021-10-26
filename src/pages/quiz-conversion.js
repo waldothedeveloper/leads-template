@@ -1,5 +1,6 @@
 import { FormTemplate } from "../components/form-template/template";
 import Layout from "../components/layout";
+import PropTypes from "prop-types";
 import React from "react";
 import { StaticImage } from "gatsby-plugin-image";
 import { formMachine } from "../components/machines/form-machine";
@@ -38,6 +39,10 @@ const QuizConversion = ({ location }) => {
       </div>
     </Layout>
   );
+};
+
+QuizConversion.propTypes = {
+  location: PropTypes.object.isRequired,
 };
 
 export default QuizConversion;

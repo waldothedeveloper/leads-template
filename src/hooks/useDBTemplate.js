@@ -28,27 +28,25 @@ export const useDBTemplate = (addressProps) => {
   `);
 
   data.allAirtable.edges.map((elem, idx) => {
-    if (finalData[`quiz${idx + 1}`]) {
-      return null;
-    } else {
-      return (finalData[`quiz${idx + 1}`] = {
-        type: elem.node.data.type,
-        question: elem.node.data.Question_Name,
-        choices: elem.node.data.Radio_type_choices,
-        id: elem.node.data.id,
-        errorMessage: null,
-        verified: null,
-        verification: elem.node.data.verification,
-        name: elem.node.data.name,
-        maxLength: elem.node.data.maxLength,
-        placeholder: elem.node.data.placeholder,
-        optional: elem.node.data.optional,
-        response:
-          elem.node.data.verification === "zipcode" && addressProps.address
-            ? addressProps.address
-            : null,
-      });
-    }
+    return finalData[`quiz${idx + 1}`]
+      ? null
+      : (finalData[`quiz${idx + 1}`] = {
+          type: elem.node.data.type,
+          question: elem.node.data.Question_Name,
+          choices: elem.node.data.Radio_type_choices,
+          id: elem.node.data.id,
+          errorMessage: null,
+          verified: null,
+          verification: elem.node.data.verification,
+          name: elem.node.data.name,
+          maxLength: elem.node.data.maxLength,
+          placeholder: elem.node.data.placeholder,
+          optional: elem.node.data.optional,
+          response:
+            elem.node.data.verification === "zipcode" && addressProps.address
+              ? addressProps.address
+              : null,
+        });
   });
 
   return finalData;

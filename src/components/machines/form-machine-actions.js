@@ -67,13 +67,10 @@ export const options = {
       const currentQuestionNumber = ctx.currentQuiz;
 
       if (ctx.currentQuiz > 1) {
-        if (
-          ctx.data[`quiz${currentQuestionNumber - 1}`].response?.postal_code
-        ) {
-          return (ctx.currentQuiz -= 2);
-        } else {
-          return (ctx.currentQuiz -= 1);
-        }
+        return ctx.data[`quiz${currentQuestionNumber - 1}`].response
+          ?.postal_code
+          ? (ctx.currentQuiz -= 2)
+          : (ctx.currentQuiz -= 1);
       }
     }),
   },
