@@ -19,16 +19,15 @@ export const formMachine = (data) => {
         entry: () => console.log("Entering the I-D-L-E state"),
         always: {
           cond: (ctx, _) => {
-            const currentQuestionNumber = ctx.currentQuiz;
-            const state = ctx.data;
-            const currentQ = state[`quiz${currentQuestionNumber}`];
+            const id = ctx.currentQuiz;
+            const { verification, response } = ctx.data[`quiz${id}`];
 
-            if (currentQ.verification === "zipcode") {
-              return zipCodeRegex.test(currentQ.response);
+            if (verification === "zipcode") {
+              return zipCodeRegex.test(response);
             }
 
-            if (currentQ.verification === "phone_number") {
-              return currentQ.response !== null && currentQ.response.length > 2;
+            if (verification === "phone_number") {
+              return response !== null && response.length > 2;
             }
           },
           target: "validating",
@@ -55,23 +54,21 @@ export const formMachine = (data) => {
         always: {
           target: "valid",
           cond: (ctx, _) => {
-            const currentQuestionNumber = ctx.currentQuiz;
-            const state = ctx.data;
-            const currentQ = state[`quiz${currentQuestionNumber}`];
+            const number = ctx.currentQuiz;
+            const { verification, response } = ctx.data[`quiz${number}`];
 
-            if (currentQ.verification === "phone_number") {
-              return validatePhoneNumber(currentQ.response);
+            if (verification === "phone_number") {
+              return validatePhoneNumber(response);
             }
           },
         },
         invoke: {
           src: (ctx, _) => {
-            const currentQuestionNumber = ctx.currentQuiz;
-            const state = ctx.data;
-            const currentQ = state[`quiz${currentQuestionNumber}`];
+            const number = ctx.currentQuiz;
+            const { verification, response } = ctx.data[`quiz${number}`];
 
-            if (currentQ.verification === "zipcode") {
-              return verifyZipcode(currentQ.response);
+            if (verification === "zipcode") {
+              return verifyZipcode(response);
             }
           },
           onDone: [
@@ -96,12 +93,12 @@ export const formMachine = (data) => {
       valid: {
         entry: (ctx, _) => {
           console.log("ENTER TO THE VALID!!!! STATE");
-          const currentQuestionNumber = ctx.currentQuiz;
-          const state = ctx.data;
-          const currentQ = state[`quiz${currentQuestionNumber}`];
+          const number = ctx.currentQuiz;
+          let currentQuestion = ctx.data[`quiz${number}`];
 
-          currentQ.errorMessage = "";
-          currentQ.verified = true;
+          currentQuestion.errorMessage = "";
+          currentQuestion.verified = true;
+          return currentQuestion;
         },
         on: {
           CHANGE: {
@@ -119,6 +116,7 @@ export const formMachine = (data) => {
         },
       },
       retry: {
+        entry: () => console.log("ENTER TO THE RETRY-RETRY STATE"),
         on: {
           CHANGE: {
             actions: ["updateState"],
@@ -128,10 +126,11 @@ export const formMachine = (data) => {
       },
       error: {
         entry: assign((ctx, event) => {
-          const currentQuestionNumber = ctx.currentQuiz;
-          const state = ctx.data;
-          const currentQ = state[`quiz${currentQuestionNumber}`];
+          console.log("ENTER TO THE ERROR ! STATE");
+          const number = ctx.currentQuiz;
+          const currentQ = ctx.data[`quiz${number}`];
           currentQ.errorMessage = "Our support is currently limited to Florida";
+          return currentQ;
         }),
         on: {
           CHANGE: {

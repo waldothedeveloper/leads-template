@@ -6,38 +6,35 @@ export const options = {
     updateState: assign((ctx, event) => {
       if (event.type !== "CHANGE") return {};
       const value = event.value;
-      const currentQuestionNumber = ctx.currentQuiz;
+      const number = ctx.currentQuiz;
       const currData = { ...ctx };
+      const currentQuestion = currData.data[`quiz${number}`];
+      const { verification } = currentQuestion;
 
-      if (
-        currData.data[`quiz${currentQuestionNumber}`].verification ===
-        "phone_number"
-      ) {
-        currData.data[`quiz${currentQuestionNumber}`].response =
-          formatPhoneNumber(value);
+      if (verification === "phone_number") {
+        currentQuestion.response = formatPhoneNumber(value);
       } else {
-        currData.data[`quiz${currentQuestionNumber}`].response = value;
+        currentQuestion.response = value;
       }
 
       //
       return currData;
     }),
     showErrorMessage: assign((ctx, _) => {
-      const currentQuestionNumber = ctx.currentQuiz;
+      const number = ctx.currentQuiz;
       const currData = { ...ctx };
-      currData.data[`quiz${currentQuestionNumber}`].verified = null;
+      const currentQuestion = currData.data[`quiz${number}`];
+      const { verification } = currData.data[`quiz${number}`];
 
-      if (
-        currData.data[`quiz${currentQuestionNumber}`].verification ===
-        "phone_number"
-      ) {
-        currData.data[`quiz${currentQuestionNumber}`].errorMessage =
-          "Please enter a valid phone number";
+      //
+      currentQuestion.verified = null;
+      if (verification === "phone_number") {
+        currentQuestion.errorMessage = "Please enter a valid phone number";
       }
     }),
     validateAndSaveToContext: assign((ctx, event) => {
-      const currentQuestionNumber = ctx.currentQuiz;
-      const currentQ = ctx.data[`quiz${currentQuestionNumber}`];
+      const number = ctx.currentQuiz;
+      const currentQ = ctx.data[`quiz${number}`];
       const eventData = event.data;
 
       const { city, state, postal_code } = eventData[currentQ.response][0];
@@ -47,13 +44,13 @@ export const options = {
     nextQuestion: assign((ctx, event) => {
       if (event.type !== "NEXT") return {};
 
-      const currentQuestionNumber = ctx.currentQuiz;
+      const number = ctx.currentQuiz;
       const totalOfQuestions = Object.keys(ctx.data).length;
 
-      if (currentQuestionNumber < totalOfQuestions) {
-        if (ctx.data[`quiz${currentQuestionNumber}`].optional) {
+      if (number < totalOfQuestions) {
+        if (ctx.data[`quiz${number}`].optional) {
           ctx.currentQuiz += 1;
-        } else if (ctx.data[`quiz${currentQuestionNumber}`].response) {
+        } else if (ctx.data[`quiz${number}`].response) {
           ctx.currentQuiz += 1;
         }
       }

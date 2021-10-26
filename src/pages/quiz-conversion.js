@@ -13,14 +13,16 @@ const QuizConversion = ({ location }) => {
   const addressProps = location.state;
   const data = useDBTemplate(addressProps);
   const [state, send] = useMachine(() => formMachine(data), options);
+  console.log("CONTEXT: ", state.context);
 
   const currentQuestion = getCurrentQuestion(state);
-  console.log("currentQuestion: ", currentQuestion);
+  // console.log("currentQuestion: ", currentQuestion);
 
   return (
     <Layout>
       <div className="relative lg:min-h-screen">
         <div className="absolute inset-0">
+          {/* TODO: this static image needs to change per project, I think I should refactor to dynamic image coming from Contentful */}
           <StaticImage
             className="w-full h-full object-cover"
             src="../images/air-conditioner-unit-minified.jpg"
