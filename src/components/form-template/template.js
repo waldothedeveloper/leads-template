@@ -9,7 +9,7 @@ import { WizardCard } from "./wizard-card";
 export const FormTemplate = ({ send, currentQuestion, stateMachine }) => {
   //
   return (
-    <div className="grid grid-cols-1 gap-6 place-items-center place-content-center">
+    <div className="max-w-xl mx-auto">
       <WizardCard send={send} currentQuestion={currentQuestion}>
         {currentQuestion.type === "radio" ? (
           <RadioType currentQuestion={currentQuestion} send={send} />

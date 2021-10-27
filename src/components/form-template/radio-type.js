@@ -18,7 +18,7 @@ export const RadioType = ({ currentQuestion, send }) => {
           ? "ring-2 ring-offset-2 ring-offset-cyan-800 ring-white ring-opacity-60"
           : ""
       }
-          ${checked ? "bg-cyan-600 text-white" : "bg-transparent"}
+          ${checked ? "bg-cyan-600 text-white" : "bg-white"}
                     relative rounded-lg shadow-md px-5 py-4 cursor-pointer flex focus:outline-none`,
     []
   );
@@ -52,7 +52,7 @@ export const RadioType = ({ currentQuestion, send }) => {
   //
   return (
     <div className="w-full px-4 py-6">
-      <div className="w-full max-w-md mx-auto">
+      <div className="w-full max-w-xl mx-auto">
         <RadioGroup
           value={currentQuestion.response || ""}
           onChange={handleOnChange}
