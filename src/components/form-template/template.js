@@ -10,7 +10,11 @@ export const FormTemplate = ({ send, currentQuestion, stateMachine }) => {
   //
   return (
     <div className="max-w-xl mx-auto">
-      <WizardCard send={send} currentQuestion={currentQuestion}>
+      <WizardCard
+        send={send}
+        currentQuestion={currentQuestion}
+        stateMachine={stateMachine}
+      >
         {currentQuestion.type === "radio" ? (
           <RadioType currentQuestion={currentQuestion} send={send} />
         ) : currentQuestion.type === "textarea" ? (

@@ -53,6 +53,7 @@ export const options = {
         } else if (ctx.data[`quiz${number}`].response) {
           ctx.currentQuiz += 1;
         }
+        return true;
       }
     }),
     prevQuestion: assign((ctx, event) => {

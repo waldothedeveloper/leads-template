@@ -43,6 +43,5 @@ export const formatPhoneNumber = (value) => {
 };
 
 export const validatePhoneNumber = (phone) => {
-  console.log("phoneNumberRegex.test(phone)", phoneNumberRegex.test(phone));
   return phoneNumberRegex.test(phone) ?? false;
 };

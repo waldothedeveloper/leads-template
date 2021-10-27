@@ -60,6 +60,7 @@ export const formMachine = (data) => {
             if (verification === "phone_number") {
               return validatePhoneNumber(response);
             }
+            return false;
           },
         },
         invoke: {
@@ -100,6 +101,31 @@ export const formMachine = (data) => {
           currentQuestion.verified = true;
           return currentQuestion;
         },
+
+        // invoke: {
+        //   src: (ctx, _) => {
+        //     if (ctx.currentQuiz === Object.keys(ctx.data).length) {
+        //       return new Promise((resolve, reject) => {
+        //         setTimeout(() => {
+        //           resolve("ok");
+        //         }, 500);
+        //       });
+        //     }
+        //     return false;
+        //   },
+        //   onDone: [
+        //     {
+        //       actions: (ctx, event) => (ctx.test = "info saved to database"),
+        //       cond: (_, event) => {
+        //         console.log("event: ", event);
+        //         return event.data || false;
+        //       },
+        //       target: "complete",
+        //     },
+        //     { target: "error" },
+        //   ],
+        //   onError: [{ target: "retry" }],
+        // },
         on: {
           CHANGE: {
             actions: ["updateState", "showErrorMessage"],
@@ -109,6 +135,7 @@ export const formMachine = (data) => {
             target: "idle",
             actions: "nextQuestion",
           },
+
           PREV: {
             target: "idle",
             actions: "prevQuestion",
@@ -141,6 +168,7 @@ export const formMachine = (data) => {
         //
       },
       complete: {
+        entry: () => console.log("FINAL STATE!!!!!!"),
         type: "final",
       },
     },
