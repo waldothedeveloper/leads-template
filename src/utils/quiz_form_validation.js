@@ -18,7 +18,9 @@ export const formatPhoneNumber = (value) => {
   if (!value) return value;
 
   // clean the input for any non-digit values.
-  const phoneNumber = value.replace(/[^\d]/g, "");
+  const phoneNumber = value.includes("+1")
+    ? value.replace(/^\+[1]/, "")
+    : value.replace(/[^\d]/g, "");
 
   // phoneNumberLength is used to know when to apply our formatting for the phone number
   const phoneNumberLength = phoneNumber.length;

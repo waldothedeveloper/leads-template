@@ -14,7 +14,6 @@ const QuizConversion = ({ location }) => {
   const [state, send] = useMachine(() => formMachine(data), options);
 
   const currentQuestion = getCurrentQuestion(state);
-  // console.log("currentQuestion: ", currentQuestion);
 
   return (
     <Layout>

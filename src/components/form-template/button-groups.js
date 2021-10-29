@@ -16,20 +16,20 @@ export const ButtonGroups = ({
   const sendPrevious = useCallback(() => send("PREV"), [send]);
   const sendNext = useCallback(() => send("NEXT"), [send]);
   const sendSubmit = useCallback(() => {
-    // let fields = {};
+    let fields = {};
 
-    // for (let key in stateMachine.context.data) {
-    //   fields = {
-    //     ...fields,
-    //     "Lead-Date": new Date(),
-    //     [stateMachine.context.data[key].question]:
-    //       stateMachine.context.data[key].verification === "zipcode"
-    //         ? `city: ${stateMachine.context.data[key].response.city}\n state: ${stateMachine.context.data[key].response.state}\n zipcode: ${stateMachine.context.data[key].response.postal_code}\n`
-    //         : stateMachine.context.data[key].response,
-    //   };
-    // }
+    for (let key in stateMachine.context.data) {
+      fields = {
+        ...fields,
+        "Lead-Date": new Date(),
+        [stateMachine.context.data[key].question]:
+          stateMachine.context.data[key].verification === "zipcode"
+            ? `city: ${stateMachine.context.data[key].response.city}\n state: ${stateMachine.context.data[key].response.state}\n zipcode: ${stateMachine.context.data[key].response.postal_code}\n`
+            : stateMachine.context.data[key].response,
+      };
+    }
 
-    saveToDB(stateMachine.context.data);
+    return saveToDB(fields);
   }, [stateMachine]);
 
   return (

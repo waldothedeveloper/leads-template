@@ -1,5 +1,11 @@
 import { navigate } from "gatsby";
+
 export const saveToDB = async (data) => {
+  const prefix = "+1";
+  const phone = data["What is your phone number?"];
+  const cleanPhone = phone.replace(/-/g, "");
+  const finalPhone = prefix.concat(cleanPhone);
+
   try {
     await window
       .fetch(`/api/save_to_airtable`, {
@@ -10,11 +16,13 @@ export const saveToDB = async (data) => {
         body: JSON.stringify(data),
       })
       .then((res) => {
-        console.log("res: ", res);
-        res.json();
-        console.log("HERE YOU WILL NAVIGATE TO VERIFY PHONE NUMBER WITH CODE");
+        return navigate("/verify-code", {
+          state: {
+            phone: finalPhone,
+          },
+        });
       });
   } catch (error) {
-    console.log("error: ", error);
+    // console.log("error: ", error);
   }
 };
