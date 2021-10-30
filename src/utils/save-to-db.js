@@ -16,10 +16,12 @@ export const saveToDB = async (data) => {
         body: JSON.stringify(data),
       })
       .then((res) => {
-        return navigate("/verify-code", {
-          state: {
-            phone: finalPhone,
-          },
+        return res.json().then(() => {
+          return navigate("/verify-code", {
+            state: {
+              phone: finalPhone,
+            },
+          });
         });
       });
   } catch (error) {

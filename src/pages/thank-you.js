@@ -2,7 +2,7 @@ import Layout from "../components/layout";
 import { Link } from "gatsby";
 import React from "react";
 import { StaticImage } from "gatsby-plugin-image";
-/* This example requires Tailwind CSS v2.0+ */
+
 const offers = [
   {
     name: "Download the app",
@@ -30,16 +30,14 @@ const ThankYou = () => {
             <div className="max-w-7xl mx-auto lg:px-8">
               <ul className="grid grid-cols-1 divide-y divide-gray-200 lg:grid-cols-3 lg:divide-y-0 lg:divide-x">
                 {offers.map((offer) => (
-                  <li key={offer.name} className="flex flex-col">
-                    <a
-                      href={offer.href}
-                      className="relative flex-1 flex flex-col justify-center bg-white py-6 px-4 text-center focus:z-10"
-                    >
-                      <p className="text-sm text-gray-500">{offer.name}</p>
-                      <p className="font-semibold text-gray-900">
-                        {offer.description}
-                      </p>
-                    </a>
+                  <li
+                    key={offer.name}
+                    className="relative flex flex-col justify-center bg-white py-6 px-4 text-center focus:z-10"
+                  >
+                    <p className="text-sm text-gray-500">{offer.name}</p>
+                    <p className="font-semibold text-gray-900">
+                      {offer.description}
+                    </p>
                   </li>
                 ))}
               </ul>
@@ -52,25 +50,16 @@ const ThankYou = () => {
               className="hidden absolute w-1/2 h-full bg-blueGray-100 lg:block"
             />
             <div className="relative bg-gray-100 lg:bg-transparent">
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 lg:grid lg:grid-cols-2">
-                <div className="max-w-2xl mx-auto py-24 lg:py-64 lg:max-w-none">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 lg:grid lg:grid-cols-2 lg:place-content-start">
+                <div className="max-w-2xl mx-auto lg:max-w-none py-24 lg:py-64">
                   <div className="lg:pr-16">
                     <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl xl:text-6xl">
-                      You'll soon receive a phone call
+                      You&apos;ll soon receive a phone call
                     </h1>
                     <p className="mt-4 text-xl text-gray-600">
-                      Our team will contact you soon to schedule a consult with
-                      one of our HVAC partners. Now that we've verified your
-                      information, it's time to do the fun part.
+                      Our team will contact you soon to schedule a consultation
+                      with one of our HVAC partners.
                     </p>
-                    <div className="mt-6">
-                      <Link
-                        to="/quiz-conversion"
-                        className="inline-block bg-gradient-to-r from-teal-500 to-cyan-700 border border-transparent py-3 px-8 rounded-md font-medium text-white"
-                      >
-                        Start Over
-                      </Link>
-                    </div>
                   </div>
                 </div>
               </div>

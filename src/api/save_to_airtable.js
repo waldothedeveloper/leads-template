@@ -31,7 +31,7 @@ const handler = (req, res) => {
       ],
       (err, records) => {
         if (err) {
-          console.error(err);
+          // console.error(err);
           return;
         }
         return records;

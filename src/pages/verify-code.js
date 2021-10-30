@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 
 import Layout from "../components/layout";
+import PropTypes from "prop-types";
 import { finishPhoneVerification } from "../utils/finish-phone-verification";
 import { formatPhoneNumber } from "../utils/quiz_form_validation";
 import { verifyPhoneWithCode } from "../utils/verify-phone-with-code";
@@ -108,4 +109,7 @@ const VerifyPhoneWithCode = ({ location }) => {
   );
 };
 
+VerifyPhoneWithCode.propTypes = {
+  location: PropTypes.object.isRequired,
+};
 export default VerifyPhoneWithCode;

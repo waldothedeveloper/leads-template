@@ -24,28 +24,26 @@ export const RadioType = ({ currentQuestion, send }) => {
   );
 
   const renderCheckedOption = useCallback((elem) => {
-    return ({ _, checked }) => (
-      <>
-        <div className="flex items-center justify-between w-full">
-          <div className="flex items-center">
-            <div className="text-sm">
-              <RadioGroup.Label
-                as="p"
-                className={`font-medium  ${
-                  checked ? "text-white" : "text-gray-900"
-                }`}
-              >
-                {elem}
-              </RadioGroup.Label>
-            </div>
+    return ({ checked }) => (
+      <div className="flex items-center justify-between w-full">
+        <div className="flex items-center">
+          <div className="text-sm">
+            <RadioGroup.Label
+              as="p"
+              className={`font-medium  ${
+                checked ? "text-white" : "text-gray-900"
+              }`}
+            >
+              {elem}
+            </RadioGroup.Label>
           </div>
-          {checked && (
-            <div className="flex-shrink-0 text-white">
-              <CheckCircleIcon className="w-6 h-6" />
-            </div>
-          )}
         </div>
-      </>
+        {checked && (
+          <div className="flex-shrink-0 text-white">
+            <CheckCircleIcon className="w-6 h-6" />
+          </div>
+        )}
+      </div>
     );
   }, []);
 
@@ -77,7 +75,10 @@ export const RadioType = ({ currentQuestion, send }) => {
   );
 };
 
+RadioType.displayName = "RadioType";
 RadioType.propTypes = {
   currentQuestion: PropTypes.object.isRequired,
   send: PropTypes.func.isRequired,
+  active: PropTypes.oneOf([PropTypes.bool, undefined]),
+  checked: PropTypes.oneOf([PropTypes.bool, undefined]),
 };

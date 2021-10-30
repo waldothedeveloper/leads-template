@@ -16,7 +16,7 @@ export const formMachine = (data) => {
     },
     states: {
       idle: {
-        entry: () => console.log("Entering the I-D-L-E state"),
+        // entry: () => console.log("Entering the I-D-L-E state"),
         always: {
           cond: (ctx, _) => {
             const id = ctx.currentQuiz;
@@ -45,7 +45,7 @@ export const formMachine = (data) => {
         },
       },
       validating: {
-        entry: () => console.log("ENTER TO THE VALIDATING STATE"),
+        // entry: () => console.log("ENTER TO THE VALIDATING STATE"),
         on: {
           CHANGE: {
             actions: ["updateState", "showErrorMessage"],
@@ -93,7 +93,7 @@ export const formMachine = (data) => {
       },
       valid: {
         entry: (ctx, _) => {
-          console.log("ENTER TO THE VALID!!!! STATE");
+          // console.log("ENTER TO THE VALID!!!! STATE");
           const number = ctx.currentQuiz;
           let currentQuestion = ctx.data[`quiz${number}`];
 
@@ -102,30 +102,6 @@ export const formMachine = (data) => {
           return currentQuestion;
         },
 
-        // invoke: {
-        //   src: (ctx, _) => {
-        //     if (ctx.currentQuiz === Object.keys(ctx.data).length) {
-        //       return new Promise((resolve, reject) => {
-        //         setTimeout(() => {
-        //           resolve("ok");
-        //         }, 500);
-        //       });
-        //     }
-        //     return false;
-        //   },
-        //   onDone: [
-        //     {
-        //       actions: (ctx, event) => (ctx.test = "info saved to database"),
-        //       cond: (_, event) => {
-        //         console.log("event: ", event);
-        //         return event.data || false;
-        //       },
-        //       target: "complete",
-        //     },
-        //     { target: "error" },
-        //   ],
-        //   onError: [{ target: "retry" }],
-        // },
         on: {
           CHANGE: {
             actions: ["updateState", "showErrorMessage"],
@@ -143,7 +119,7 @@ export const formMachine = (data) => {
         },
       },
       retry: {
-        entry: () => console.log("ENTER TO THE RETRY-RETRY STATE"),
+        // entry: () => console.log("ENTER TO THE RETRY-RETRY STATE"),
         on: {
           CHANGE: {
             actions: ["updateState"],
@@ -153,7 +129,7 @@ export const formMachine = (data) => {
       },
       error: {
         entry: assign((ctx, event) => {
-          console.log("ENTER TO THE ERROR ! STATE");
+          // console.log("ENTER TO THE ERROR ! STATE");
           const number = ctx.currentQuiz;
           const currentQ = ctx.data[`quiz${number}`];
           currentQ.errorMessage = "Our support is currently limited to Florida";
@@ -168,7 +144,7 @@ export const formMachine = (data) => {
         //
       },
       complete: {
-        entry: () => console.log("FINAL STATE!!!!!!"),
+        // entry: () => console.log("FINAL STATE!!!!!!"),
         type: "final",
       },
     },
