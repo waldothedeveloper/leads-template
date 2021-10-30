@@ -64,8 +64,8 @@ export const ButtonGroups = ({
 };
 
 ButtonGroups.propTypes = {
-  currentQuestion: PropTypes.object.isRequired,
+  currentQuestion: PropTypes.object,
   disabled: PropTypes.oneOf([null, true, "", false]),
   send: PropTypes.func.isRequired,
-  stateMachine: PropTypes.object.isRequired,
+  stateMachine: PropTypes.object,
 };

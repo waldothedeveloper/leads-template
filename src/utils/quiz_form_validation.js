@@ -12,7 +12,6 @@ export const verifyZipcode = (zip) => {
     });
 };
 
-// TODO: TAKE THIS FN SOME WHERE ELSE PLEASE
 export const formatPhoneNumber = (value) => {
   // if input value is falsy eg if the user deletes the input, then just return
   if (!value) return value;

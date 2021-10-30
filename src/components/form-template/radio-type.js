@@ -47,6 +47,8 @@ export const RadioType = ({ currentQuestion, send }) => {
     );
   }, []);
 
+  renderCheckedOption.displayName = "renderCheckedOption";
+
   //
   return (
     <div className="w-full px-4 py-6">
@@ -75,9 +77,8 @@ export const RadioType = ({ currentQuestion, send }) => {
   );
 };
 
-RadioType.displayName = "RadioType";
 RadioType.propTypes = {
-  currentQuestion: PropTypes.object.isRequired,
+  currentQuestion: PropTypes.object,
   send: PropTypes.func.isRequired,
   active: PropTypes.oneOf([PropTypes.bool, undefined]),
   checked: PropTypes.oneOf([PropTypes.bool, undefined]),

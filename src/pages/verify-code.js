@@ -25,7 +25,7 @@ const VerifyPhoneWithCode = ({ location }) => {
       if (code && code.length === 6) {
         return finishPhoneVerification(phone, code, setError);
       }
-      //
+      return false;
     },
     [phone, code]
   );
@@ -110,6 +110,6 @@ const VerifyPhoneWithCode = ({ location }) => {
 };
 
 VerifyPhoneWithCode.propTypes = {
-  location: PropTypes.object.isRequired,
+  location: PropTypes.object,
 };
 export default VerifyPhoneWithCode;

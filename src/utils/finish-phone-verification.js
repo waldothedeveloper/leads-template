@@ -14,6 +14,8 @@ export const finishPhoneVerification = async (phone, code, setError) => {
             setError(
               "The code is invalid. Check your code or request a new one"
             );
+
+            return data;
           } else {
             setError(null);
             return navigate("/thank-you");

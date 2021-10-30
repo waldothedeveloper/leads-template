@@ -24,10 +24,10 @@ export const formMachine = (data) => {
 
             if (verification === "zipcode") {
               return zipCodeRegex.test(response);
-            }
-
-            if (verification === "phone_number") {
+            } else if (verification === "phone_number") {
               return response !== null && response.length > 2;
+            } else {
+              return false;
             }
           },
           target: "validating",
@@ -59,8 +59,9 @@ export const formMachine = (data) => {
 
             if (verification === "phone_number") {
               return validatePhoneNumber(response);
+            } else {
+              return false;
             }
-            return false;
           },
         },
         invoke: {
@@ -70,6 +71,8 @@ export const formMachine = (data) => {
 
             if (verification === "zipcode") {
               return verifyZipcode(response);
+            } else {
+              return false;
             }
           },
           onDone: [
@@ -77,10 +80,14 @@ export const formMachine = (data) => {
               cond: (_, event) => {
                 const zipcode = Object.keys(event.data);
 
-                if (zipcode.length > 0) {
-                  const { state } = event.data[zipcode[0]][0];
-                  return state === "Florida" ? true : false;
-                }
+                // since we only support Florida for now
+                const supportedArea =
+                  zipcode.length > 0 &&
+                  event.data[zipcode].filter(
+                    (elem) => elem.state === "Florida"
+                  );
+
+                return supportedArea;
               },
               target: "valid",
               actions: "validateAndSaveToContext",

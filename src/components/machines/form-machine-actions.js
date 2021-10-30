@@ -55,11 +55,15 @@ export const options = {
         }
         return true;
       }
+
+      // return {};
     }),
     prevQuestion: assign((ctx, event) => {
       if (event.type !== "PREV") return {};
 
-      if (ctx.currentQuiz > 1) ctx.currentQuiz -= 1;
+      if (ctx.currentQuiz > 1) {
+        return (ctx.currentQuiz -= 1);
+      }
     }),
   },
 };

@@ -22,7 +22,7 @@ export const InputMessages = ({ currentQuestion }) => {
       )}
       {validPhoneNumber && (
         <p className="mt-2 text-md text-cyan-700 text-left pl-1 font-medium">
-          Excellent, let's finish!
+          Excellent, let&apos;s finish!
         </p>
       )}
       {invalidPhoneNumber && (
