@@ -20,12 +20,11 @@ const handler = (req, res) => {
     // paste below this line
     return client.verify
       .services(process.env.TWILIO_SERVICE_ID)
-      .verificationChecks.create({ to: phone, code: code })
+      .verificationChecks.create({ to: phone, code })
       .then((verification_check) => {
         return res.status(200).json({ message: verification_check.status });
       });
   } catch (err) {
-    // console.log("err on finish phone code verification: ", err);
     return res
       .status(500)
       .json({ message: "There has been a big error.", error: err });
