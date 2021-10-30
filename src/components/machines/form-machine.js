@@ -57,11 +57,7 @@ export const formMachine = (data) => {
             const number = ctx.currentQuiz;
             const { verification, response } = ctx.data[`quiz${number}`];
 
-            if (verification === "phone_number") {
-              return validatePhoneNumber(response);
-            } else {
-              return false;
-            }
+            return verification === "phone_number" ? validatePhoneNumber(response) : false;
           },
         },
         invoke: {
@@ -69,11 +65,7 @@ export const formMachine = (data) => {
             const number = ctx.currentQuiz;
             const { verification, response } = ctx.data[`quiz${number}`];
 
-            if (verification === "zipcode") {
-              return verifyZipcode(response);
-            } else {
-              return false;
-            }
+            return verification === "zipcode" ? verifyZipcode(response) : false;
           },
           onDone: [
             {
