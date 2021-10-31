@@ -4,6 +4,6 @@
 
 ### Email addresses
 
-privacy@acfix.today
-info@acfix.today
-contact@acfix.today
+- privacy@acfix.today
+- info@acfix.today
+- contact@acfix.today

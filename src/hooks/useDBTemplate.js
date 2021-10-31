@@ -43,7 +43,7 @@ export const useDBTemplate = (addressProps) => {
           placeholder: elem.node.data.placeholder,
           optional: elem.node.data.optional,
           response:
-            elem.node.data.verification === "zipcode" && addressProps.address
+            elem.node.data.verification === "zipcode" && addressProps?.address
               ? addressProps.address
               : null,
         });

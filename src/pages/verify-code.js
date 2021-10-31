@@ -7,7 +7,7 @@ import { formatPhoneNumber } from "../utils/quiz_form_validation";
 import { verifyPhoneWithCode } from "../utils/verify-phone-with-code";
 
 const VerifyPhoneWithCode = ({ location }) => {
-  const phone = location.state.phone;
+  const phone = location?.state?.phone;
   const [code, setCode] = useState(null);
   const [error, setError] = useState(null);
 
