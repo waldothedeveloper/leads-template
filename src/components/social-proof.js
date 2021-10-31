@@ -24,7 +24,11 @@ export const SocialProof = () => {
                 <GatsbyImage
                   image={image}
                   alt="featured AC FIX customer"
-                  className="w-full h-full object-cover"
+                  imgStyle={{
+                    borderRadius: `0.75rem`,
+                    width: "100%",
+                    height: "100%",
+                  }}
                 />
               </div>
             </div>
