@@ -1,5 +1,6 @@
 import { Link } from "gatsby";
 import React from "react";
+// import { useTermsOfUse } from "../../hooks/useTermsOfUse";
 
 const navLinks = [
   { id: 0, name: "California Privacy", href: "/CCPA-Notice" },
@@ -19,6 +20,8 @@ const navLinks = [
 ];
 
 export const Footer = () => {
+  // const data = useTermsOfUse();
+
   //
   return (
     <footer className="bg-blueGray-800">

@@ -7,3 +7,6 @@
 - privacy@acfix.today
 - info@acfix.today
 - contact@acfix.today
+
+Privacy Policy
+https://www.acfix.today/privacy-policy
