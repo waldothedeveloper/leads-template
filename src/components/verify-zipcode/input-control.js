@@ -24,7 +24,7 @@ export const InputControl = ({ current, handleChange, error, success }) => {
         <InputStates current={current} error={error} success={success} />
       </div>
 
-      <div className="sm:ml-3">
+      <div className="ml-3">
         <button
           disabled={!success}
           type="submit"
