@@ -1,6 +1,6 @@
 import { CardDetails } from "./card-details";
 import React from "react";
-import { YellowBlow } from "./yellow-blob";
+// import { YellowBlow } from "./yellow-blob";
 
 // interesting stats/facts
 // ! Each day in Florida, 36 people need ac repair
@@ -14,7 +14,7 @@ export const Card = () => {
           <div className="flex-1 px-2.5 py-3 md:py-6 xl:p-6 flex flex-col justify-between mx-auto">
             <div className="flex-1 w-full">
               {/* yellow blob only for sm viewports */}
-              <YellowBlow />
+              {/* <YellowBlow /> */}
               {/* details */}
               <CardDetails />
             </div>
