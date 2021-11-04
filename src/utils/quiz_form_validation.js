@@ -1,5 +1,6 @@
 export const zipCodeRegex = /^\d{5,6}(?:[-\s]\d{4})?$/;
-const phoneNumberRegex = /^[2-9]{3}-[0-9]{3}-[0-9]{4}$/;
+const phoneNumberRegex =
+  /^(?:(?:\+?1\s*(?:[.-]\s*)?)?(?:\(\s*([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9])\s*\)|([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9]))\s*(?:[.-]\s*)?)?([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]{2})\s*(?:[.-]\s*)?([0-9]{4})(?:\s*(?:#|x\.?|ext\.?|extension)\s*(\d+))?$/;
 
 export const verifyZipcode = (zip) => {
   return fetch(`/api/verify-zipcode?query=${zip}`)
@@ -32,12 +33,12 @@ export const formatPhoneNumber = (value) => {
   // if phoneNumberLength is greater than 4 and less the 7 we start to return
   // the formatted number
   if (phoneNumberLength < 7) {
-    return `${phoneNumber.slice(0, 3)}-${phoneNumber.slice(3)}`;
+    return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3)}`;
   }
 
   // finally, if the phoneNumberLength is greater then seven, we add the last
   // bit of formatting and return it.
-  return `${phoneNumber.slice(0, 3)}-${phoneNumber.slice(
+  return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(
     3,
     6
   )}-${phoneNumber.slice(6, 10)}`;

@@ -5,6 +5,8 @@ import {
   zipCodeRegex,
 } from "../../utils/quiz_form_validation";
 
+import safeGet from "just-safe-get";
+
 export const formMachine = (data) => {
   return createMachine({
     id: "formMachine",
@@ -57,7 +59,9 @@ export const formMachine = (data) => {
             const number = ctx.currentQuiz;
             const { verification, response } = ctx.data[`quiz${number}`];
 
-            return verification === "phone_number" ? validatePhoneNumber(response) : false;
+            return verification === "phone_number"
+              ? validatePhoneNumber(response)
+              : false;
           },
         },
         invoke: {
@@ -70,16 +74,13 @@ export const formMachine = (data) => {
           onDone: [
             {
               cond: (_, event) => {
+                const data = event.data;
                 const zipcode = Object.keys(event.data);
+                const state = safeGet(data, `${zipcode[0]}`);
+                const result =
+                  state && Object.values(state[0]).includes("Florida");
 
-                // since we only support Florida for now
-                const supportedArea =
-                  zipcode.length > 0 &&
-                  event.data[zipcode].filter(
-                    (elem) => elem.state === "Florida"
-                  );
-
-                return supportedArea;
+                return result;
               },
               target: "valid",
               actions: "validateAndSaveToContext",
@@ -140,11 +141,6 @@ export const formMachine = (data) => {
             actions: ["updateState"],
           },
         },
-        //
-      },
-      complete: {
-        // entry: () => console.log("FINAL STATE!!!!!!"),
-        type: "final",
       },
     },
   });

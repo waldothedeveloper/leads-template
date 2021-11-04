@@ -20,6 +20,9 @@ export const useDBTemplate = (addressProps) => {
               placeholder
               verification
               name
+              inputmode
+              pattern
+              autocomplete
             }
           }
         }
@@ -37,6 +40,9 @@ export const useDBTemplate = (addressProps) => {
           id: elem.node.data.id,
           errorMessage: null,
           verified: null,
+          inputmode: elem.node.data.inputmode,
+          pattern: elem.node.data.pattern,
+          autocomplete: elem.node.data.autocomplete,
           verification: elem.node.data.verification,
           name: elem.node.data.name,
           maxLength: elem.node.data.maxLength,

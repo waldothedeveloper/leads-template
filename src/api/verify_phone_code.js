@@ -12,8 +12,10 @@ const handler = (req, res) => {
 
     const phone = req.body;
 
-    if (!phone) {
-      return res.status(500).json({ error: "There isn't any data." });
+    if (!phone || Object.keys(phone).length === 0) {
+      return res
+        .status(500)
+        .json({ error: "Please provide a valid phone number", status: 500 });
     }
 
     // paste below this line
@@ -21,13 +23,30 @@ const handler = (req, res) => {
       .services(process.env.TWILIO_SERVICE_ID)
       .verifications.create({ to: phone, channel: "sms" })
       .then((verification) => {
-        return res.status(200).json({ message: verification.status });
+        // console.log("verification: ", verification);
+        if (verification.status === "pending") {
+          return res.status(200).json({
+            message: verification.status,
+            attempts: verification.sendCodeAttempts,
+          });
+        }
+      })
+      .catch((err) => {
+        // console.log("Error inside verify", err);
+        if (err.status === 429) {
+          return res.status(429).json({
+            message: "You have reached your limit for verification attempts",
+            status: err.status,
+          });
+        }
       });
   } catch (err) {
     // console.log("err on api fn phone code: ", err);
-    return res
-      .status(500)
-      .json({ message: "There has been a big error.", error: err });
+    return res.status(500).json({
+      message: "There has been a big error.",
+      error: err,
+      status: 500,
+    });
   }
 };
 

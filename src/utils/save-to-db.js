@@ -3,7 +3,7 @@ import { navigate } from "gatsby";
 export const saveToDB = async (data) => {
   const prefix = "+1";
   const phone = data["What is your phone number?"];
-  const cleanPhone = phone.replace(/-/g, "");
+  const cleanPhone = phone.replace(/\D+/g, "");
   const finalPhone = prefix.concat(cleanPhone);
 
   try {

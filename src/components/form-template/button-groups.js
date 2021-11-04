@@ -12,7 +12,7 @@ export const ButtonGroups = ({
   const currNum = stateMachine.context.currentQuiz;
   const totalQuiz = Object.keys(stateMachine.context.data).length;
 
-  //
+  // we need to extract this to it's own function/component
   const sendPrevious = useCallback(() => send("PREV"), [send]);
   const sendNext = useCallback(() => send("NEXT"), [send]);
   const sendSubmit = useCallback(() => {

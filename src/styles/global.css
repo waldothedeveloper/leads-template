@@ -18,7 +18,7 @@
   }
 
   .idle {
-    @apply block w-full pr-10 border-blueGray-300 text-blueGray-900 placeholder-blueGray-300 focus:outline-none focus:ring-blueGray-500 focus:border-blueGray-500 text-xl rounded-md;
+    @apply block w-full pr-10 border-blueGray-300 text-blueGray-900 placeholder-blueGray-300 focus:outline-none focus:ring-orange-500 focus:border-orange-400 text-xl rounded-md;
   }
 
   .errorClass {
@@ -30,6 +30,6 @@
   }
   ,
   .idleClass {
-    @apply border-2 border-gray-700 rounded-lg px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-gray-600 focus-within:border-gray-600;
+    @apply border-2 border-gray-700 rounded-lg px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-orange-500 focus-within:border-orange-400;
   }
 }

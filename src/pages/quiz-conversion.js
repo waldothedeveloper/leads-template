@@ -12,7 +12,6 @@ const QuizConversion = ({ location }) => {
   const addressProps = location.state;
   const data = useDBTemplate(addressProps);
   const [state, send] = useMachine(() => formMachine(data), options);
-
   const currentQuestion = getCurrentQuestion(state);
 
   return (

@@ -1,37 +1,25 @@
-import React, { useCallback, useEffect, useState } from "react";
+import { BadgeCheckIcon, ExclamationIcon } from "@heroicons/react/solid";
 
+import { Counter } from "../components/phone-verification/counter";
 import Layout from "../components/layout";
+import { PhoneVerificationPlaceholder } from "../components/phone-verification-placeholder";
 import PropTypes from "prop-types";
-import { finishPhoneVerification } from "../utils/finish-phone-verification";
+import React from "react";
 import { formatPhoneNumber } from "../utils/quiz_form_validation";
-import { verifyPhoneWithCode } from "../utils/verify-phone-with-code";
+import { useValidatePhoneNumber } from "../hooks/useValidatePhoneNumber";
 
 const VerifyPhoneWithCode = ({ location }) => {
+  // !the first and second const phone is a test, delete it when you're done
+  // const phone = "asdasdasd";
+
+  // ! THIS ONE WILL STAY
   const phone = location?.state?.phone;
-  const [code, setCode] = useState(null);
-  const [error, setError] = useState(null);
+  const { code, error, handleChange, handleSubmit, requestNewCode } =
+    useValidatePhoneNumber(phone);
 
-  useEffect(() => {
-    const result = verifyPhoneWithCode(phone, setError);
-
-    return result.then((data) => data);
-  }, [phone]);
-
-  const handleChange = useCallback((event) => setCode(event.target.value), []);
-
-  const handleSubmit = useCallback(
-    (event) => {
-      if (event) event.preventDefault();
-      if (code && code.length === 6) {
-        return finishPhoneVerification(phone, code, setError);
-      }
-      return false;
-    },
-    [phone, code]
-  );
-
-  //
-  return (
+  return !phone ? (
+    <PhoneVerificationPlaceholder />
+  ) : (
     <Layout>
       <div className="bg-gradient-to-b from-blueGray-100 to-cyan-100 min-h-screen">
         <div className="pt-12 sm:pt-16 lg:pt-20">
@@ -52,18 +40,18 @@ const VerifyPhoneWithCode = ({ location }) => {
             <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="max-w-2xl mx-auto rounded-lg overflow-hidden flex">
                 <div className="flex-1 bg-white px-6 py-8 lg:p-12">
-                  <h3 className="text-sm font-semibold text-gray-700">
+                  <h3 className="text-sm font-medium text-blueGray-700">
                     An SMS code with 6 digits was sent to this number:{" "}
-                    {formatPhoneNumber(phone)}
+                    {formatPhoneNumber(phone)}. <br />
+                    This code will be valid for 10 minutes.
                   </h3>
 
                   <form
                     onSubmit={handleSubmit}
-                    action="#"
                     className="sm:max-w-xl sm:mx-auto lg:mx-0 mt-2"
                   >
                     <div className="sm:flex">
-                      <div className="min-w-0 flex-1">
+                      <div className="min-w-0 flex-1 relative">
                         <label htmlFor="phone-verification" className="sr-only">
                           Phone Number verification
                         </label>
@@ -74,15 +62,20 @@ const VerifyPhoneWithCode = ({ location }) => {
                           maxLength={6}
                           id="text"
                           type="text"
+                          inputMode="numeric"
+                          pattern="[0-9]*"
+                          autoComplete="one-time-code"
                           placeholder="123456"
                           className="focus:ring-cyan-500 focus:border-cyan-500 pl-4 border-gray-300 block w-full px-4 py-3 rounded-md text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2focus:ring-offset-gray-900"
                         />
-                        <p
-                          className="mt-1 text-sm text-red-600 font-medium"
-                          id="email-error"
-                        >
-                          {error ? error : ""}
-                        </p>
+                        <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                          {error && (
+                            <ExclamationIcon
+                              className="h-8 w-8 text-red-500"
+                              aria-hidden="true"
+                            />
+                          )}
+                        </div>
                       </div>
                       <div className="mt-3 sm:mt-0 sm:ml-3">
                         <button
@@ -99,6 +92,13 @@ const VerifyPhoneWithCode = ({ location }) => {
                       </div>
                     </div>
                   </form>
+                  <p
+                    className="mt-1 text-sm text-red-600 font-medium"
+                    id="email-error"
+                  >
+                    {error ? error : ""}
+                  </p>
+                  <Counter requestNewCode={requestNewCode} />
                 </div>
               </div>
             </div>

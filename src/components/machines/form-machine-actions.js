@@ -1,45 +1,60 @@
 import { assign } from "xstate";
 import { formatPhoneNumber } from "../../utils/quiz_form_validation";
+import safeGet from "just-safe-get";
+import safeSet from "just-safe-set";
 //
 export const options = {
   actions: {
     updateState: assign((ctx, event) => {
       if (event.type !== "CHANGE") return {};
-      const value = event.value;
-      const number = ctx.currentQuiz;
+
       const currData = { ...ctx };
-      const currentQuestion = currData.data[`quiz${number}`];
-      const { verification } = currentQuestion;
+      const number = safeGet(currData, "currentQuiz");
+      const verification = safeGet(currData, `data.quiz${number}.verification`);
 
-      if (verification === "phone_number") {
-        currentQuestion.response = formatPhoneNumber(value);
-      } else {
-        currentQuestion.response = value;
-      }
+      verification === "phone_number"
+        ? safeSet(
+            currData,
+            `data.quiz${number}.response`,
+            formatPhoneNumber(event.value)
+          )
+        : safeSet(currData, `data.quiz${number}.response`, event.value);
 
-      //
       return currData;
     }),
     showErrorMessage: assign((ctx, _) => {
-      const number = ctx.currentQuiz;
       const currData = { ...ctx };
-      const currentQuestion = currData.data[`quiz${number}`];
-      const { verification } = currData.data[`quiz${number}`];
+      const number = safeGet(currData, "currentQuiz");
+      const verification = safeGet(currData, `data.quiz${number}.verification`);
 
-      //
-      currentQuestion.verified = null;
+      safeSet(currData, `data.quiz${number}.verified`, null);
+
       if (verification === "phone_number") {
-        currentQuestion.errorMessage = "Please enter a valid phone number";
+        safeSet(
+          currData,
+          `data.quiz${number}.errorMessage`,
+          "Please enter a valid phone number"
+        );
       }
+
+      return currData;
     }),
     validateAndSaveToContext: assign((ctx, event) => {
-      const number = ctx.currentQuiz;
-      const currentQ = ctx.data[`quiz${number}`];
-      const eventData = event.data;
-
-      const { city, state, postal_code } = eventData[currentQ.response][0];
-
-      currentQ.response = { city, state, postal_code };
+      const number = safeGet(ctx, "currentQuiz");
+      let zipcode, address;
+      // simpler var
+      const data = event.data;
+      // destructuring the zipcode returned by the zipcodebase API
+      [zipcode] = Object.keys(data);
+      // destructuring the full address array returned by the zipcodebase API
+      [address] = safeGet(data, zipcode);
+      const { city, state, postal_code } = address;
+      // saving the data on context
+      return safeSet(ctx, `data.quiz${number}.response`, {
+        city,
+        state,
+        postal_code,
+      });
     }),
     nextQuestion: assign((ctx, event) => {
       if (event.type !== "NEXT") return {};
