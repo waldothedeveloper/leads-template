@@ -13,7 +13,10 @@ export const InputControl = ({ current, handleChange, error, success }) => {
           value={current?.context?.zipcode || ""}
           onChange={handleChange}
           type="text"
+          inputMode="numeric"
+          autoComplete="postal-code"
           name="zipcode"
+          aria-invalid="true"
           id="zipcode"
           className={error ? "error" : success ? "success" : "idle"}
           placeholder="e.g. 33014"

@@ -1,6 +1,5 @@
-import { BadgeCheckIcon, ExclamationIcon } from "@heroicons/react/solid";
-
 import { Counter } from "../components/phone-verification/counter";
+import { ExclamationIcon } from "@heroicons/react/solid";
 import Layout from "../components/layout";
 import { PhoneVerificationPlaceholder } from "../components/phone-verification-placeholder";
 import PropTypes from "prop-types";
