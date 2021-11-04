@@ -12,13 +12,7 @@ export const options = {
       const number = safeGet(currData, "currentQuiz");
       const verification = safeGet(currData, `data.quiz${number}.verification`);
 
-      verification === "phone_number"
-        ? safeSet(
-            currData,
-            `data.quiz${number}.response`,
-            formatPhoneNumber(event.value)
-          )
-        : safeSet(currData, `data.quiz${number}.response`, event.value);
+      
 
       return currData;
     }),
