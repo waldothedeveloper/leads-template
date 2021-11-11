@@ -15,7 +15,6 @@ const VerifyPhoneWithCode = ({ location }) => {
   const phone = location?.state?.phone;
   const [state, send] = useMachine(() => verifyCodeMachine(phone));
   const { code, errorMessage, attempts } = state.context;
-  console.log("attempts: ", attempts);
 
   const disabled = ["idle", "smsCodeNotSent", "validating"].some(state.matches);
   const disableSubmit = code.length < 6;
