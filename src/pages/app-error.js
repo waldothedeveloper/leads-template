@@ -1,9 +1,10 @@
 import Layout from "../components/layout";
+import PropTypes from "prop-types";
 import React from "react";
-
+import { useCompanyPhone } from "../hooks/useCompanyPhone";
 //
-const AppError = ({ location }) => {
-  const phoneNumber = location?.state?.phone;
+const AppError = () => {
+  const { phoneNumber } = useCompanyPhone();
 
   //
   return (
@@ -47,4 +48,7 @@ const AppError = ({ location }) => {
   );
 };
 
+AppError.propTypes = {
+  location: PropTypes.object.isRequired,
+};
 export default AppError;

@@ -6,7 +6,7 @@ import { useCompanyPhone } from "../hooks/useCompanyPhone";
 
 const NotAllowed = ({ location }) => {
   const { phoneNumber } = useCompanyPhone();
-  const { message, code } = location.state;
+  const { message, code } = location.state ?? "";
 
   return (
     <Layout>

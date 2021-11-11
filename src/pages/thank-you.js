@@ -1,5 +1,4 @@
 import Layout from "../components/layout";
-import { Link } from "gatsby";
 import React from "react";
 import { StaticImage } from "gatsby-plugin-image";
 
