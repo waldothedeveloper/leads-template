@@ -1,41 +1,25 @@
-import React, { useCallback } from "react";
-
 import { Counter } from "../components/phone-verification/counter";
 import { ExclamationIcon } from "@heroicons/react/solid";
 import Layout from "../components/layout";
 import { PhoneVerificationPlaceholder } from "../components/phone-verification-placeholder";
 import PropTypes from "prop-types";
+import React from "react";
 import { formatPhoneNumber } from "../utils/quiz_form_validation";
-import { useMachine } from "@xstate/react";
-// import { useValidatePhoneNumber } from "../hooks/useValidatePhoneNumber";
-import { verifyCodeMachine } from "../components/machines/verify-code-machine";
+import { useSMSverificationProcess } from "../hooks/useSMSverificationProcess";
 
 const VerifyPhoneWithCode = ({ location }) => {
-  // ! THIS ONE WILL STAY
   const phone = location?.state?.phone;
-  const [state, send] = useMachine(() => verifyCodeMachine(phone));
-  const { code, errorMessage, attempts } = state.context;
-
-  const disabled = ["idle", "smsCodeNotSent", "validating"].some(state.matches);
-  const disableSubmit = code.length < 6;
-
-  //! THIS WILL BE DELETED
-  // const { code, error, handleChange, handleSubmit, requestNewCode } =
-  //   useValidatePhoneNumber(phone);
-
-  //! THIS BELOW WILL BE TAKEN TO ITS OWN FUNCTION
-
-  const handleOnChange = useCallback(
-    (event) => {
-      send("CHANGE", event.target);
-    },
-    [send]
-  );
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    return send("SUBMIT_CODE");
-  };
+  const {
+    handleOnChange,
+    handleSubmit,
+    disableSubmit,
+    disabled,
+    errorMessage,
+    attempts,
+    code,
+    state,
+    send,
+  } = useSMSverificationProcess(phone);
 
   return !phone ? (
     <PhoneVerificationPlaceholder />

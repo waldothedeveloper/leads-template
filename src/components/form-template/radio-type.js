@@ -19,15 +19,15 @@ export const RadioType = ({ currentQuestion, send }) => {
           : ""
       }
           ${checked ? "bg-cyan-600 text-white" : "bg-white"}
-                    relative rounded-lg shadow-md px-5 py-4 cursor-pointer flex focus:outline-none`,
+                    relative rounded-lg shadow-md px-2 py-4 cursor-pointer flex focus:outline-none`,
     []
   );
 
   const renderCheckedOption = useCallback((elem) => {
     return ({ checked }) => (
       <div className="flex items-center justify-between w-full">
-        <div className="flex items-center">
-          <div className="text-sm">
+        <div className="flex items-center justify-center">
+          <div className="text-sm text-left">
             <RadioGroup.Label
               as="p"
               className={`font-medium  ${

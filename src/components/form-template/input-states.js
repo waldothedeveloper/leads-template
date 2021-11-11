@@ -18,7 +18,7 @@ export const InputStates = ({ currentQuestion, stateMachine }) => {
   return (
     <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
       {/* validating */}
-      {stateMachine.matches("validating") && !error && <SpinSVG />}
+      {stateMachine.matches("validating") && <SpinSVG />}
       {/* invalid  */}
       {error && !stateMachine.matches("validating") && (
         <ExclamationIcon className="h-8 w-8 text-red-500" aria-hidden="true" />
