@@ -34,8 +34,7 @@ export const PhoneVerificationPlaceholder = () => {
               </p>
               <p className="mt-3 text-lg text-blueGray-300">
                 It appears that you landed on this page by mistake. Please
-                follow the instructions below in order to get the best HVAC
-                quotes.
+                perform the steps below in order to obtain the best HVAC quotes.
               </p>
               <div className="mt-8">
                 <div className="inline-flex rounded-md shadow">

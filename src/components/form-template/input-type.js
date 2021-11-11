@@ -36,9 +36,7 @@ export const InputType = ({ currentQuestion, send, children }) => {
       >
         <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
           {name === "phone_number" && (
-            <span className="font-medium text-xl flex items-center text-gray-400 border-r-2 border-gray-300 pr-1">
-              <img src={usaFlag} className="h-8 w-8  pr-1" alt="usa_flag" /> +1
-            </span>
+            <img src={usaFlag} className="h-8 w-8  pr-1" alt="usa_flag" />
           )}
         </div>
         <input
@@ -59,7 +57,7 @@ export const InputType = ({ currentQuestion, send, children }) => {
               ? "text-red-500"
               : idle && "text-gray-800",
             name === "phone_number"
-              ? "bg-transparent block w-full border-0 pl-16 focus:ring-0 text-xl font-medium ml-2"
+              ? "bg-transparent block w-full border-0 pl-8 focus:ring-0 text-xl font-medium ml-2"
               : "bg-transparent block w-full border-0 p-0 focus:ring-0 text-xl font-medium"
           )}
         />

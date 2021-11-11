@@ -1,6 +1,7 @@
 import { navigate } from "gatsby";
 
 export const saveToDB = async (data) => {
+  // console.log("saveToDB: ", data);
   const prefix = "+1";
   const phone = data["What is your phone number?"];
   const cleanPhone = phone.replace(/\D+/g, "");

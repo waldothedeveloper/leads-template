@@ -13,16 +13,16 @@ const handler = (req, res) => {
     }
 
     const data = req.body;
+    // console.log("data on finish SMS verification API: ", data);
 
     // no data no laudry
     if (!data || Object.keys(data).length === 0) {
       return res.status(500).json({
-        error: "Phone number or code cannot be blank",
+        error: "Phone number and/or code cannot be blank",
         status: 500,
       });
     }
 
-    //
     const { phone, code } = JSON.parse(data);
     // no phone or no code well... no laudry
     if (!phone || !code) {
@@ -37,21 +37,17 @@ const handler = (req, res) => {
       .services(process.env.TWILIO_SERVICE_ID)
       .verificationChecks.create({ to: phone, code })
       .then((verification_check) => {
-        if (verification_check.status === "pending") {
-          return res
-            .status(500)
-            .json({ status: 500, message: verification_check.status });
-        }
-
-        return res
-          .status(200)
-          .json({ message: verification_check.status, status: 200 });
+        // console.log("verification_check: ", verification_check);
+        return res.json({
+          status: verification_check.status,
+        });
       });
   } catch (err) {
+    // console.log("err: ", err);
     return res.status(500).json({
       message: "Our system has detected an unexpected error.",
-      status: 500,
-      error: err,
+      status: err.status,
+      code: err.code,
     });
   }
 };

@@ -1,6 +1,6 @@
 export const zipCodeRegex = /^\d{5,6}(?:[-\s]\d{4})?$/;
-const phoneNumberRegex =
-  /^(?:(?:\+?1\s*(?:[.-]\s*)?)?(?:\(\s*([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9])\s*\)|([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9]))\s*(?:[.-]\s*)?)?([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]{2})\s*(?:[.-]\s*)?([0-9]{4})(?:\s*(?:#|x\.?|ext\.?|extension)\s*(\d+))?$/;
+// const phoneNumberRegex =
+//   /^(?:(?:\+?1\s*(?:[.-]\s*)?)?(?:\(\s*([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9])\s*\)|([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9]))\s*(?:[.-]\s*)?)?([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]{2})\s*(?:[.-]\s*)?([0-9]{4})(?:\s*(?:#|x\.?|ext\.?|extension)\s*(\d+))?$/;
 
 export const verifyZipcode = (zip) => {
   return fetch(`/api/verify-zipcode?query=${zip}`)
@@ -22,28 +22,40 @@ export const formatPhoneNumber = (value) => {
     ? value.replace(/^\+[1]/, "")
     : value.replace(/[^\d]/g, "");
 
-  // phoneNumberLength is used to know when to apply our formatting for the phone number
   const phoneNumberLength = phoneNumber.length;
-
-  // we need to return the value with no formatting if its less then four digits
-  // this is to avoid weird behavior that occurs if you  format the area code to early
 
   if (phoneNumberLength < 4) return phoneNumber;
 
-  // if phoneNumberLength is greater than 4 and less the 7 we start to return
-  // the formatted number
   if (phoneNumberLength < 7) {
     return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3)}`;
   }
 
-  // finally, if the phoneNumberLength is greater then seven, we add the last
-  // bit of formatting and return it.
   return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(
     3,
     6
   )}-${phoneNumber.slice(6, 10)}`;
 };
 
-export const validatePhoneNumber = (phone) => {
-  return phoneNumberRegex.test(phone) ?? false;
+export const validatePhoneNumber = async (phone) => {
+  const result = await fetch(`/api/validate_phone_number`, {
+    method: `POST`,
+    body: phone,
+  })
+    .then((res) => {
+      return res.json();
+    })
+    .then((data) => {
+      if (data.status !== 200) {
+        return false;
+      } else if (data.type === "mobile") {
+        return data;
+      } else {
+        return false;
+      }
+    })
+    .catch((err) => {
+      return err;
+    });
+
+  return result;
 };

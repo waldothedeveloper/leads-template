@@ -1,6 +1,6 @@
 import fetch from "node-fetch";
 
-const verifyZipcode = async (req, res) => {
+const handler = async (req, res) => {
   const zip = req.query.query;
 
   // POST data to an authenticated API
@@ -21,4 +21,4 @@ const verifyZipcode = async (req, res) => {
   }
 };
 
-export default verifyZipcode;
+export default handler;

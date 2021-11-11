@@ -1,9 +1,11 @@
 import React, { useCallback, useEffect, useState } from "react";
 
 import PropTypes from "prop-types";
+import { retryTimeouts } from "../../utils/retryTimeouts";
+import { timer } from "../../utils/timer";
 
-export const Counter = ({ requestNewCode }) => {
-  const [counter, setCounter] = useState(30);
+export const Counter = ({ send, attempts }) => {
+  const [counter, setCounter] = useState(() => retryTimeouts[attempts] || 30);
 
   useEffect(() => {
     const tick = () => {
@@ -13,16 +15,14 @@ export const Counter = ({ requestNewCode }) => {
       return;
     };
 
-    const id = setInterval(() => tick(), 1000);
-
-    return () => clearInterval(id);
+    const id = setTimeout(() => tick(), 1000);
+    return () => clearTimeout(id);
   }, [counter]);
 
+  // send anothe SMS
   const resetCounter = useCallback(() => {
-    requestNewCode();
-    setCounter(30);
-    return;
-  }, [requestNewCode]);
+    send("RESEND_SMS");
+  }, [send]);
 
   //
   return (
@@ -36,7 +36,7 @@ export const Counter = ({ requestNewCode }) => {
             colors="primary:#334155,secondary:#22D3EE"
             style={{ width: 25, height: 25 }}
           />{" "}
-          Resend code in {counter} seconds
+          Resend code in {timer(counter)}
         </p>
       ) : (
         <button
@@ -53,4 +53,6 @@ export const Counter = ({ requestNewCode }) => {
 
 Counter.propTypes = {
   requestNewCode: PropTypes.func,
+  send: PropTypes.func.isRequired,
+  attempts: PropTypes.number.isRequired,
 };

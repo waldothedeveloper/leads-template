@@ -12,11 +12,9 @@ export const stepMachine = createMachine(
       errorMessage: "",
     },
     states: {
-      //! # 2 zipcode
       idle: {
         on: {
           NEXT: { target: "verified", cond: "verifiedZipCode" },
-          //! User can always change zip code in this state
           EDIT_ZIPCODE: {
             actions: ["assignZipCodeToContext"],
           },
@@ -35,8 +33,19 @@ export const stepMachine = createMachine(
               src: (ctx, _) => verifyZipcode(ctx.zipcode),
               onDone: [
                 {
-                  cond: (_, event) =>
-                    Object.keys(event.data).length > 0 ?? false,
+                  cond: (ctx, event) => {
+                    console.log("CHECKING ON_DONE", event.data);
+
+                    if (
+                      Object.keys(event.data).length > 0 &&
+                      event.data[ctx.zipcode] &&
+                      event.data[ctx.zipcode][0].state === "Florida"
+                    ) {
+                      return true;
+                    } else {
+                      return false;
+                    }
+                  },
                   actions: "validateZipCodeAndSaveToContext",
                   target: "valid",
                 },
@@ -132,7 +141,7 @@ export const stepMachine = createMachine(
           };
         }
 
-        // return {};
+        return false;
       }),
     },
 

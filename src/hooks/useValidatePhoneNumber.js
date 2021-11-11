@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 
 import { finishPhoneVerification } from "../utils/finish-phone-verification";
-import { verifyPhoneWithCode } from "../utils/verify-phone-with-code";
+import { sendVerificationCode } from "../utils/send_verification_code";
 
 //
 export const useValidatePhoneNumber = (phone) => {
@@ -12,7 +12,9 @@ export const useValidatePhoneNumber = (phone) => {
 
   useEffect(() => {
     const requestCode = () => {
-      return verifyPhoneWithCode(phone, setError).then(() => setCodeSent(true));
+      return sendVerificationCode(phone, setError).then(() =>
+        setCodeSent(true)
+      );
     };
 
     if (phone && !codeSent) {
@@ -36,7 +38,7 @@ export const useValidatePhoneNumber = (phone) => {
   );
 
   const requestNewCode = () => {
-    return verifyPhoneWithCode(phone, setError).then(() => setCodeSent(true));
+    return sendVerificationCode(phone, setError).then(() => setCodeSent(true));
   };
 
   return {

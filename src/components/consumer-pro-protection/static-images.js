@@ -1,8 +1,6 @@
 import { Card } from "./card";
 import React from "react";
 import { StaticImage } from "gatsby-plugin-image";
-import acguy from "../../images/acfix-partners/ac-guy-2_adobespark.png";
-import bgcolorful from "../../images/patterns/colorful-removed-bg-resized.png";
 export const StaticImages = () => {
   return (
     <div className="my-0 w-full h-full self-end relative overflow-hidden">
@@ -22,14 +20,7 @@ export const StaticImages = () => {
       </div>
 
       {/* image of ac worker */}
-      {/* testing purposes only */}
-      {/* <div className="aspect-w-3 aspect-h-4 md:aspect-w-2 md:aspect-h-2 z-10">
-        <img
-          className="object-cover object-right h-full w-full"
-          src={acguy}
-          alt="worker"
-        />
-      </div> */}
+
       <StaticImage
         aspectRatio={4 / 4}
         loading="lazy"
@@ -46,14 +37,7 @@ export const StaticImages = () => {
       />
 
       {/* bg colorful image for small and medium devices only */}
-      {/* <div className="z-0 absolute inset-0 md:transform md:-translate-y-6 xl:hidden">
-        
-        <img
-          className="object-cover object-right h-full w-full"
-          src={bgcolorful}
-          alt="worker"
-        />
-      </div> */}
+
       <StaticImage
         className="z-0 absolute inset-0 md:transform md:-translate-y-6 xl:hidden"
         loading="lazy"

@@ -7,8 +7,7 @@ export const WizardCard = ({
   currentQuestion,
   stateMachine,
 }) => {
-  const { response, optional, question } = currentQuestion;
-  const disabled = response && optional !== true;
+  const { question } = currentQuestion;
 
   return (
     <div className="h-full text-center">
@@ -21,7 +20,6 @@ export const WizardCard = ({
           <ButtonGroups
             stateMachine={stateMachine}
             currentQuestion={currentQuestion}
-            disabled={disabled}
             send={send}
           />
         </div>

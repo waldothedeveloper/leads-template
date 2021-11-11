@@ -18,7 +18,7 @@ export const formMachine = (data) => {
     },
     states: {
       idle: {
-        // entry: () => console.log("Entering the I-D-L-E state"),
+        entry: () => console.log("Entering the I-D-L-E state"),
         always: {
           cond: (ctx, _) => {
             const id = ctx.currentQuiz;
@@ -27,7 +27,7 @@ export const formMachine = (data) => {
             if (verification === "zipcode") {
               return zipCodeRegex.test(response);
             } else if (verification === "phone_number") {
-              return response !== null && response.length > 2;
+              return response !== null && response.length === 14;
             } else {
               return false;
             }
@@ -47,21 +47,10 @@ export const formMachine = (data) => {
         },
       },
       validating: {
-        // entry: () => console.log("ENTER TO THE VALIDATING STATE"),
+        entry: () => console.log("ENTER TO THE VALIDATING STATE"),
         on: {
           CHANGE: {
             actions: ["updateState", "showErrorMessage"],
-          },
-        },
-        always: {
-          target: "valid",
-          cond: (ctx, _) => {
-            const number = ctx.currentQuiz;
-            const { verification, response } = ctx.data[`quiz${number}`];
-
-            return verification === "phone_number"
-              ? validatePhoneNumber(response)
-              : false;
           },
         },
         invoke: {
@@ -69,18 +58,28 @@ export const formMachine = (data) => {
             const number = ctx.currentQuiz;
             const { verification, response } = ctx.data[`quiz${number}`];
 
-            return verification === "zipcode" ? verifyZipcode(response) : false;
+            return verification === "zipcode"
+              ? verifyZipcode(response)
+              : verification === "phone_number"
+              ? validatePhoneNumber(response)
+              : false;
           },
           onDone: [
             {
-              cond: (_, event) => {
+              cond: (ctx, event) => {
                 const data = event.data;
-                const zipcode = Object.keys(event.data);
-                const state = safeGet(data, `${zipcode[0]}`);
-                const result =
-                  state && Object.values(state[0]).includes("Florida");
+                const number = ctx.currentQuiz;
+                const { verification } = ctx.data[`quiz${number}`];
 
-                return result;
+                if (verification === "zipcode") {
+                  const zipcode = Object.keys(event.data);
+                  const state = safeGet(data, `${zipcode[0]}`);
+                  return state && Object.values(state[0]).includes("Florida");
+                }
+
+                if (verification === "phone_number") {
+                  return data;
+                }
               },
               target: "valid",
               actions: "validateAndSaveToContext",
@@ -93,7 +92,7 @@ export const formMachine = (data) => {
       },
       valid: {
         entry: (ctx, _) => {
-          // console.log("ENTER TO THE VALID!!!! STATE");
+          console.log("ENTER TO THE VALID!!!! STATE");
           const number = ctx.currentQuiz;
           let currentQuestion = ctx.data[`quiz${number}`];
 
@@ -119,7 +118,7 @@ export const formMachine = (data) => {
         },
       },
       retry: {
-        // entry: () => console.log("ENTER TO THE RETRY-RETRY STATE"),
+        entry: () => console.log("ENTER TO THE RETRY-RETRY STATE"),
         on: {
           CHANGE: {
             actions: ["updateState"],
@@ -129,10 +128,19 @@ export const formMachine = (data) => {
       },
       error: {
         entry: assign((ctx, event) => {
-          // console.log("ENTER TO THE ERROR ! STATE");
+          console.log("ENTER TO THE ERROR ! STATE");
           const number = ctx.currentQuiz;
           const currentQ = ctx.data[`quiz${number}`];
-          currentQ.errorMessage = "Our support is currently limited to Florida";
+
+          if (currentQ.verification === "zipcode") {
+            currentQ.errorMessage =
+              "Our support is currently limited to Florida";
+          }
+
+          if (currentQ.verification === "phone_number") {
+            currentQ.errorMessage = "Please enter a valid phone number";
+          }
+
           return currentQ;
         }),
         on: {

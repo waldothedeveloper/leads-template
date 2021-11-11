@@ -12,15 +12,13 @@ export const options = {
       const number = safeGet(currData, "currentQuiz");
       const verification = safeGet(currData, `data.quiz${number}.verification`);
 
-      verification === "phone_number"
+      return verification === "phone_number"
         ? safeSet(
             currData,
             `data.quiz${number}.response`,
             formatPhoneNumber(event.value)
           )
         : safeSet(currData, `data.quiz${number}.response`, event.value);
-
-      return currData;
     }),
     showErrorMessage: assign((ctx, _) => {
       const currData = { ...ctx };
@@ -40,38 +38,46 @@ export const options = {
       return currData;
     }),
     validateAndSaveToContext: assign((ctx, event) => {
-      const number = safeGet(ctx, "currentQuiz");
       let zipcode, address;
-      // simpler var
       const data = event.data;
-      // destructuring the zipcode returned by the zipcodebase API
-      [zipcode] = Object.keys(data);
-      // destructuring the full address array returned by the zipcodebase API
-      [address] = safeGet(data, zipcode);
-      const { city, state, postal_code } = address;
-      // saving the data on context
-      return safeSet(ctx, `data.quiz${number}.response`, {
-        city,
-        state,
-        postal_code,
-      });
+      // console.log("data: ", data);
+      const number = safeGet(ctx, "currentQuiz");
+      const { verification } = ctx.data[`quiz${number}`];
+
+      if (verification === "zipcode") {
+        [zipcode] = Object.keys(data);
+        [address] = safeGet(data, zipcode);
+        const { city, state, postal_code } = address;
+
+        return safeSet(ctx, `data.quiz${number}.response`, {
+          city,
+          state,
+          postal_code,
+        });
+      }
+
+      if (verification === "phone_number") {
+        safeSet(ctx, `data.quiz${number}.response`, data.nationalFormat);
+        safeSet(ctx, `data.quiz${number}.valid_phone`, data.valid_phone);
+        return;
+      }
     }),
     nextQuestion: assign((ctx, event) => {
       if (event.type !== "NEXT") return {};
 
-      const number = ctx.currentQuiz;
       const totalOfQuestions = Object.keys(ctx.data).length;
+      const number = safeGet(ctx, "currentQuiz");
+      const optional = safeGet(ctx, `data.quiz${number}.optional`);
+      const response = safeGet(ctx, `data.quiz${number}.response`);
 
       if (number < totalOfQuestions) {
-        if (ctx.data[`quiz${number}`].optional) {
-          ctx.currentQuiz += 1;
-        } else if (ctx.data[`quiz${number}`].response) {
-          ctx.currentQuiz += 1;
+        if (optional) {
+          return (ctx.currentQuiz += 1);
+        } else if (response) {
+          return (ctx.currentQuiz += 1);
         }
-        return true;
+        return ctx;
       }
-
-      // return {};
     }),
     prevQuestion: assign((ctx, event) => {
       if (event.type !== "PREV") return {};
