@@ -78,7 +78,7 @@ export const verifyCodeMachine = (phone) => {
               actions: assign((ctx, event) => {
                 ctx.errorMessage =
                   "There was an unanticipated error. Please give us a call.";
-                console.log("onError -> FROM SEND SMS TO PHONE API: ", event);
+                // console.log("onError -> FROM SEND SMS TO PHONE API: ", event);
               }),
             },
           },
@@ -137,7 +137,7 @@ export const verifyCodeMachine = (phone) => {
                 target: "valid",
                 cond: (ctx, event) => {
                   const data = event.data;
-                  console.log("Response from verify SMS code sent: ", data);
+                  // console.log("Response from verify SMS code sent: ", data);
                   if (data.status !== "approved") {
                     return false;
                   } else {
