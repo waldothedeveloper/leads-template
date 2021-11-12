@@ -2,20 +2,26 @@ import { Footer } from "./navigation/footer";
 import { Header } from "./navigation/header";
 import PropTypes from "prop-types";
 import React from "react";
-import { defineLordIconElement } from "lord-icon-element";
-import lottie from "lottie-web";
 
-defineLordIconElement(lottie.loadAnimation);
+const ClientSideOnlyLazyLordicon = React.lazy(() => import("./lordicon"));
 
 //
 const Layout = ({ children }) => {
+  const isSSR = typeof window === "undefined";
+
+  //
   return (
     <>
-      <main>
-        <Header />
-        {children}
-        <Footer />
-      </main>
+      {!isSSR && (
+        <React.Suspense fallback={<div>loading...</div>}>
+          <ClientSideOnlyLazyLordicon />
+          <main>
+            <Header />
+            {children}
+            <Footer />
+          </main>
+        </React.Suspense>
+      )}
     </>
   );
 };
