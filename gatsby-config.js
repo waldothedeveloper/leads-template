@@ -17,6 +17,7 @@ module.exports = {
       },
     },
     "gatsby-plugin-image",
+    `gatsby-plugin-preload-fonts`,
     {
       resolve: "gatsby-plugin-google-analytics",
       options: {
