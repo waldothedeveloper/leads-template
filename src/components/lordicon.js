@@ -1,6 +1,6 @@
 import { defineLordIconElement } from "lord-icon-element";
-import lottie from "lottie-web";
-defineLordIconElement(lottie.loadAnimation);
+import { loadAnimation } from "lottie-web";
+defineLordIconElement(loadAnimation);
 
 //
 const Lordicon = () => {

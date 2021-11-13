@@ -29,6 +29,7 @@ module.exports = {
         enableTags: true,
       },
     },
+    "gatsby-plugin-webpack-bundle-analyser-v2",
     "gatsby-plugin-image",
     `gatsby-plugin-preload-fonts`,
     {

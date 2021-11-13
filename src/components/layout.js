@@ -1,5 +1,6 @@
 import { Footer } from "./navigation/footer";
 import { Header } from "./navigation/header";
+import { Loader } from "./loader";
 import PropTypes from "prop-types";
 import React from "react";
 
@@ -13,9 +14,9 @@ const Layout = ({ children }) => {
   return (
     <>
       {!isSSR && (
-        <React.Suspense fallback={<div>loading...</div>}>
-          <ClientSideOnlyLazyLordicon />
+        <React.Suspense fallback={<Loader />}>
           <main>
+            <ClientSideOnlyLazyLordicon />
             <Header />
             {children}
             <Footer />
