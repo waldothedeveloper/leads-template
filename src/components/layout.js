@@ -1,28 +1,25 @@
 import { Footer } from "./navigation/footer";
 import { Header } from "./navigation/header";
-import { Loader } from "./loader";
+import { Helmet } from "react-helmet";
 import PropTypes from "prop-types";
 import React from "react";
 
-const ClientSideOnlyLazyLordicon = React.lazy(() => import("./lordicon"));
-
 //
 const Layout = ({ children }) => {
-  const isSSR = typeof window === "undefined";
-
-  //
   return (
     <>
-      {!isSSR && (
-        <React.Suspense fallback={<Loader />}>
-          <main>
-            <ClientSideOnlyLazyLordicon />
-            <Header />
-            {children}
-            <Footer />
-          </main>
-        </React.Suspense>
-      )}
+      <Helmet>
+        <script
+          async
+          src="https://cdn.lordicon.com/libs/mssddfmo/lord-icon-2.1.0.js"
+        />
+      </Helmet>
+
+      <main>
+        <Header />
+        {children}
+        <Footer />
+      </main>
     </>
   );
 };
