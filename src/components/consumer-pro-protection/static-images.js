@@ -7,6 +7,7 @@ export const StaticImages = () => {
       {/* background  color image for xl devices only */}
       <div className="hidden xl:block xl:absolute xl:inset-0 xl:w-full xl:mt-20">
         <StaticImage
+          formats={["AVIF", "WEBP", "AUTO"]}
           loading="lazy"
           imgStyle={{
             height: "100%",
@@ -22,6 +23,7 @@ export const StaticImages = () => {
       {/* image of ac worker */}
 
       <StaticImage
+        formats={["AVIF", "WEBP", "AUTO"]}
         aspectRatio={4 / 4}
         loading="lazy"
         className="z-10 transform -translate-x-44 md:-translate-x-64"
@@ -39,6 +41,7 @@ export const StaticImages = () => {
       {/* bg colorful image for small and medium devices only */}
 
       <StaticImage
+        formats={["AVIF", "WEBP", "AUTO"]}
         className="z-0 absolute inset-0 md:transform md:-translate-y-6 xl:hidden"
         loading="lazy"
         style={{

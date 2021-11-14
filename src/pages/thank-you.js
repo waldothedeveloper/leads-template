@@ -65,6 +65,7 @@ const ThankYou = () => {
             </div>
             <div className="w-full h-48 sm:h-64 lg:absolute lg:top-0 lg:right-0 lg:w-1/2 lg:h-full">
               <StaticImage
+                formats={["AVIF", "WEBP", "AUTO"]}
                 src="../images/call-rep-minified.jpg"
                 alt="One of AC-FIX call support representatives"
                 className="w-full h-full object-center object-cover"

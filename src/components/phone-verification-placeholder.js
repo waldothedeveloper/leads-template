@@ -12,6 +12,7 @@ export const PhoneVerificationPlaceholder = () => {
         <div className="relative bg-blueGray-700 max-w-5xl mx-auto rounded-2xl">
           <div className="h-56 bg-transparent sm:h-72 md:absolute md:left-0 md:h-full md:w-1/2">
             <StaticImage
+              formats={["AVIF", "WEBP", "AUTO"]}
               className="object-cover w-full h-full"
               imgStyle={{
                 borderTopLeftRadius: `1rem`,

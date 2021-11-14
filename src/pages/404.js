@@ -56,6 +56,7 @@ const NotFoundPage = () => {
         </div>
         <div className="hidden lg:block lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
           <StaticImage
+            formats={["AVIF", "WEBP", "AUTO"]}
             className="absolute inset-0 h-full w-full object-cover"
             src="../images/minified-acfix-partner-15.jpg"
             alt="acfix partner"

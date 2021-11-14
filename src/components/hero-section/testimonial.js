@@ -13,7 +13,7 @@ export const HeroTestimonial = ({ testimonial }) => {
             imgStyle={{
               borderRadius: 9999,
             }}
-            formats={["avif", "WEBP", "AUTO"]}
+            formats={["AVIF", "WEBP", "AUTO"]}
             src="../../images/reviews/hero-testimonial.jpeg"
             alt="acfix partner"
             placeholder="blurred"
