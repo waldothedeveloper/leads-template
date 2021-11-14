@@ -12,7 +12,7 @@ export const useFeaturedCustomer = () => {
           gatsbyImageData(
             layout: FULL_WIDTH
             placeholder: BLURRED
-            formats: AUTO
+            formats: WEBP
           )
         }
       }
