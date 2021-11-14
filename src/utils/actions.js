@@ -1,18 +1,17 @@
 import React from "react";
+import cellphoneIcon from "../images/icons/cellphone.svg";
+import onlineFormIcon from "../images/icons/online-form.svg";
+import supportIcon from "../images/icons/support.svg";
+import workerIcon from "../images/icons/worker.svg";
 
+//
 export const actions = [
   {
     title: "Fill out the online form",
     description:
       "To learn more about your project, we'll ask you a few questions and get some basic information about you",
     icon: (
-      <lord-icon
-        delay="2500"
-        src="https://cdn.lordicon.com/ufezupnm.json"
-        trigger="loop"
-        colors="primary:#F43F5E,secondary:#F43F5E"
-        style={{ width: 55, height: 55 }}
-      />
+      <img className="w-14 h-14" src={onlineFormIcon} alt="online form icon" />
     ),
 
     iconBackground: "bg-rose-50",
@@ -22,13 +21,7 @@ export const actions = [
     description:
       "In order to verify your identity, we will send you a text message with a 6 digit code.",
     icon: (
-      <lord-icon
-        delay="2500"
-        src="https://cdn.lordicon.com/bkhzcebe.json"
-        trigger="loop"
-        colors="primary:#22D3EE,secondary:#22D3EE"
-        style={{ width: 55, height: 55 }}
-      />
+      <img className="w-14 h-14" src={cellphoneIcon} alt="online form icon" />
     ),
 
     iconBackground: "bg-cyan-50",
@@ -38,13 +31,7 @@ export const actions = [
     description:
       "A representative from our automated system will call you to gather additional details about your project",
     icon: (
-      <lord-icon
-        delay="2500"
-        src="https://cdn.lordicon.com/zxwguguk.json"
-        trigger="loop"
-        colors="primary:#C084FC,secondary:#C084FC"
-        style={{ width: 55, height: 55 }}
-      />
+      <img className="w-14 h-14" src={supportIcon} alt="online form icon" />
     ),
 
     iconBackground: "bg-purple-50",
@@ -53,15 +40,7 @@ export const actions = [
     title: "We'll match you with the right Pro",
     description:
       "Following the collection of all the essential details, we can match you with a suitable Pro.",
-    icon: (
-      <lord-icon
-        delay="2500"
-        src="https://cdn.lordicon.com/jpromtvn.json"
-        trigger="loop"
-        colors="primary:#FACC15,secondary:#FACC15"
-        style={{ width: 55, height: 55 }}
-      />
-    ),
+    icon: <img className="w-14 h-14" src={workerIcon} alt="online form icon" />,
 
     iconBackground: "bg-yellow-50",
   },

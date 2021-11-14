@@ -2,6 +2,7 @@ import Layout from "../components/layout";
 import { Link } from "gatsby";
 import React from "react";
 import { StaticImage } from "gatsby-plugin-image";
+import telIcon from "../images/icons/telephone-blueGray500.svg";
 import { useCompanyPhone } from "../hooks/useCompanyPhone";
 
 const NotFoundPage = () => {
@@ -43,14 +44,11 @@ const NotFoundPage = () => {
                   className="inline-flex text-blueGray-500 hover:text-blueGray-700 items-center"
                 >
                   Contact Support{` `}
-                  <span className="mx-2">
-                    <lord-icon
-                      delay="1500"
-                      src="https://cdn.lordicon.com/ltxkhbfa.json"
-                      trigger="loop"
-                      colors="primary:#334155,secondary:#334155"
-                    />
-                  </span>
+                  <img
+                    className="w-10 h-10"
+                    src={telIcon}
+                    alt="telephone icon"
+                  />
                 </a>
               </nav>
             </div>

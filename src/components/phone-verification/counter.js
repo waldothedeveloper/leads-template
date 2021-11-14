@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 
 import PropTypes from "prop-types";
+import refreshIcon from "../../images/icons/refresh.svg";
 import { retryTimeouts } from "../../utils/retryTimeouts";
 import { timer } from "../../utils/timer";
 
@@ -29,13 +30,7 @@ export const Counter = ({ send, attempts }) => {
     <div className="mt-4">
       {counter > 0 ? (
         <p className="text-sm font-medium text-gray-400 flex items-center">
-          <lord-icon
-            delay="2500"
-            src="https://cdn.lordicon.com/sgfvvrmz.json"
-            trigger="loop"
-            colors="primary:#334155,secondary:#22D3EE"
-            style={{ width: 25, height: 25 }}
-          />{" "}
+          <img className="h-8 w-8" src={refreshIcon} alt="refresh icon" />
           Resend code in {timer(counter)}
         </p>
       ) : (

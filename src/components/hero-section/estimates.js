@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import React from "react";
 import { formatPhoneNumber } from "../../utils/formatPhoneNumber";
+import telIcon from "../../images/icons/telephone.svg";
 export const HeroEstimates = ({ phoneNumber }) => {
   return (
     <div>
@@ -14,14 +15,7 @@ export const HeroEstimates = ({ phoneNumber }) => {
             🤩{" "}
           </span>
         </span>
-        <span className="mx-2">
-          <lord-icon
-            delay="1500"
-            src="https://cdn.lordicon.com/ltxkhbfa.json"
-            trigger="loop"
-            colors="primary:#ffffff,secondary:#06b6d4"
-          />
-        </span>
+        <img className="w-10 h-10" src={telIcon} alt="telephone icon" />
         <span className="mr-4 text-base">{formatPhoneNumber(phoneNumber)}</span>
       </a>
     </div>

@@ -1,6 +1,7 @@
 import Layout from "../components/layout";
 import PropTypes from "prop-types";
 import React from "react";
+import telIcon from "../images/icons/telephone.svg";
 import { useCompanyPhone } from "../hooks/useCompanyPhone";
 //
 const AppError = () => {
@@ -30,14 +31,11 @@ const AppError = () => {
                   className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-rose-50 bg-rose-700 hover:bg-rose-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-500"
                 >
                   Contact Support{` `}
-                  <span className="mx-2">
-                    <lord-icon
-                      delay="1500"
-                      src="https://cdn.lordicon.com/ltxkhbfa.json"
-                      trigger="loop"
-                      colors="primary:#ffffff,secondary:#ffffff"
-                    />
-                  </span>
+                  <img
+                    className="w-10 h-10"
+                    src={telIcon}
+                    alt="telephone icon"
+                  />
                 </a>
               </div>
             </div>
