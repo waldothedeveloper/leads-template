@@ -13,7 +13,6 @@ export const useHero = () => {
         }
         leadingHeroText
         mindBlowingHeroText
-        nearYouHeroText
         testimonial
         phoneNumber
       }
