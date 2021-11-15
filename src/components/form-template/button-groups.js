@@ -39,7 +39,6 @@ export const ButtonGroups = ({ currentQuestion, send, stateMachine }) => {
 
 ButtonGroups.propTypes = {
   currentQuestion: PropTypes.object,
-  disabled: PropTypes.bool,
   send: PropTypes.func.isRequired,
   stateMachine: PropTypes.object,
 };

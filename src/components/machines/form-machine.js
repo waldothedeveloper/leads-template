@@ -67,18 +67,18 @@ export const formMachine = (data) => {
           onDone: [
             {
               cond: (ctx, event) => {
-                const data = event.data;
+                const responseData = event.data;
                 const number = ctx.currentQuiz;
                 const { verification } = ctx.data[`quiz${number}`];
 
                 if (verification === "zipcode") {
-                  const zipcode = Object.keys(event.data);
-                  const state = safeGet(data, `${zipcode[0]}`);
+                  const zipcode = Object.keys(responseData);
+                  const state = safeGet(responseData, `${zipcode[0]}`);
                   return state && Object.values(state[0]).includes("Florida");
                 }
 
                 if (verification === "phone_number") {
-                  return data;
+                  return responseData;
                 }
               },
               target: "valid",

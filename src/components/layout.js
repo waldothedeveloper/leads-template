@@ -6,13 +6,11 @@ import React from "react";
 //
 const Layout = ({ children }) => {
   return (
-    <>
-      <main>
-        <Header />
-        {children}
-        <Footer />
-      </main>
-    </>
+    <main>
+      <Header />
+      {children}
+      <Footer />
+    </main>
   );
 };
 

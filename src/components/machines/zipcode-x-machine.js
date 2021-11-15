@@ -36,15 +36,11 @@ export const stepMachine = createMachine(
                   cond: (ctx, event) => {
                     // console.log("CHECKING ON_DONE", event.data);
 
-                    if (
-                      Object.keys(event.data).length > 0 &&
+                    return Object.keys(event.data).length > 0 &&
                       event.data[ctx.zipcode] &&
                       event.data[ctx.zipcode][0].state === "Florida"
-                    ) {
-                      return true;
-                    } else {
-                      return false;
-                    }
+                      ? true
+                      : false;
                   },
                   actions: "validateZipCodeAndSaveToContext",
                   target: "valid",

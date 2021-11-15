@@ -126,6 +126,10 @@ const VerifyPhoneWithCode = ({ location }) => {
 };
 
 VerifyPhoneWithCode.propTypes = {
-  location: PropTypes.object,
+  location: PropTypes.shape({
+    state: PropTypes.shape({
+      phone: PropTypes.string.isRequired,
+    }),
+  }),
 };
 export default VerifyPhoneWithCode;

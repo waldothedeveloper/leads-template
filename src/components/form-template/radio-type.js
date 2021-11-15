@@ -80,6 +80,4 @@ export const RadioType = ({ currentQuestion, send }) => {
 RadioType.propTypes = {
   currentQuestion: PropTypes.object,
   send: PropTypes.func.isRequired,
-  active: PropTypes.oneOf([PropTypes.bool, undefined]),
-  checked: PropTypes.oneOf([PropTypes.bool, undefined]),
 };

@@ -13,7 +13,6 @@ export const Counter = ({ send, attempts }) => {
       if (counter > 0) {
         return setCounter((c) => c - 1);
       }
-      return;
     };
 
     const id = setTimeout(() => tick(), 1000);
@@ -47,7 +46,6 @@ export const Counter = ({ send, attempts }) => {
 };
 
 Counter.propTypes = {
-  requestNewCode: PropTypes.func,
   send: PropTypes.func.isRequired,
   attempts: PropTypes.number.isRequired,
 };

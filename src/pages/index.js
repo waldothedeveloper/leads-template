@@ -3,6 +3,7 @@ import { Hero } from "../components/hero-section/hero";
 import { HowItWorks } from "../components/how-it-works/how-it-works";
 import { HowWeProtect } from "../components/consumer-pro-protection/how-we-protect";
 import Layout from "../components/layout";
+import PropTypes from "prop-types";
 import React from "react";
 import SEO from "../components/seo";
 import { SocialProof } from "../components/social-proof";
@@ -29,6 +30,10 @@ const IndexPage = ({ data }) => {
       </Layout>
     </main>
   );
+};
+
+IndexPage.propTypes = {
+  data: PropTypes.object.isRequired,
 };
 
 export const query = graphql`

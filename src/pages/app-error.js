@@ -1,5 +1,4 @@
 import Layout from "../components/layout";
-import PropTypes from "prop-types";
 import React from "react";
 import telIcon from "../images/icons/telephone.svg";
 import { useCompanyPhone } from "../hooks/useCompanyPhone";
@@ -46,7 +45,4 @@ const AppError = () => {
   );
 };
 
-AppError.propTypes = {
-  location: PropTypes.object.isRequired,
-};
 export default AppError;
