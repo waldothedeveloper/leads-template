@@ -37,7 +37,7 @@ export const Header = () => {
           <Popover.Group as="nav" className="hidden md:flex space-x-10">
             <span className="text-base font-medium text-gray-50">
               Need Help? Call us:{" "}
-              <a className="underline" href={`tel:${phoneNumber}`}>
+              <a href={`tel:${phoneNumber}`}>
                 {formatPhoneNumber(phoneNumber)}
               </a>
             </span>
