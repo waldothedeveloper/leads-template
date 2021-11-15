@@ -11,7 +11,6 @@ export const Hero = () => {
   const {
     leadingHeroText,
     mindBlowingHeroText,
-    nearYouHeroText,
     testimonial,
     heroImage,
     phoneNumber,
@@ -33,7 +32,6 @@ export const Hero = () => {
               {/* hero title */}
               <HeroTitle
                 leadingHeroText={leadingHeroText}
-                nearYouHeroText={nearYouHeroText}
                 mindBlowingHeroText={mindBlowingHeroText}
               />
             </div>
