@@ -34,7 +34,7 @@ export const stepMachine = createMachine(
               onDone: [
                 {
                   cond: (ctx, event) => {
-                    console.log("CHECKING ON_DONE", event.data);
+                    // console.log("CHECKING ON_DONE", event.data);
 
                     if (
                       Object.keys(event.data).length > 0 &&

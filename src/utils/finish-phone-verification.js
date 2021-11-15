@@ -5,7 +5,7 @@ export const finishPhoneVerification = ({ code, phone }) => {
       body: JSON.stringify({ phone: phone, code: code }),
     }).then((res) => res.json());
   } catch (error) {
-    console.log("finishPhoneVerification => error: ", error);
+    // console.log("finishPhoneVerification => error: ", error);
     return error;
   }
 };
