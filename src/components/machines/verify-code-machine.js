@@ -139,11 +139,7 @@ export const verifyCodeMachine = (phone, recordID) => {
                 cond: (ctx, event) => {
                   const data = event.data;
                   // console.log("Response from verify SMS code sent: ", data);
-                  if (data.status !== "approved") {
-                    return false;
-                  } else {
-                    return data;
-                  }
+                  return data.status !== "approved" ? false : data;
                 },
               },
               { target: "invalid" },
@@ -164,11 +160,7 @@ export const verifyCodeMachine = (phone, recordID) => {
                 cond: (_, event) => {
                   const { status } = event.data;
 
-                  if (status === 200) {
-                    return event.data;
-                  } else {
-                    return false;
-                  }
+                  return status === 200 ? event.data : false;
                 },
               },
               { target: "dbError" },
