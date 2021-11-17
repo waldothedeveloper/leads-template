@@ -3,7 +3,6 @@ import React from "react";
 // import { useTermsOfUse } from "../../hooks/useTermsOfUse";
 
 const navLinks = [
-  { id: 0, name: "California Privacy", href: "/CCPA-Notice" },
   {
     id: 1,
     name: "Do not sell my Info",

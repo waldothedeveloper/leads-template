@@ -3,8 +3,9 @@ import { assign, createMachine } from "xstate";
 import { finishPhoneVerification } from "../../utils/finish-phone-verification";
 import { navigate } from "gatsby-link";
 import { sendVerificationCode } from "../../utils/send_verification_code";
+import { updateVerifiedLead } from "../../utils/update-verified-lead";
 
-export const verifyCodeMachine = (phone) => {
+export const verifyCodeMachine = (phone, recordID) => {
   return createMachine(
     {
       id: "verify-code-machine",
@@ -151,12 +152,31 @@ export const verifyCodeMachine = (phone) => {
           },
         },
         valid: {
-          entry: () => {
-            // console.log("Entering VALID WOHOO STATE!");
-            navigate("/thank-you");
+          // entry: () => console.log("Entering VALID WOHOO STATE!"),
+          invoke: {
+            src: () => {
+              // call the function that will update the record on AirTable
+              return updateVerifiedLead(recordID);
+            },
+            onDone: [
+              {
+                target: "done",
+                cond: (_, event) => {
+                  const { status } = event.data;
+
+                  if (status === 200) {
+                    return event.data;
+                  } else {
+                    return false;
+                  }
+                },
+              },
+              { target: "dbError" },
+            ],
+            onError: [{ target: "dbError" }],
           },
-          type: "final",
         },
+
         invalid: {
           entry: ["writeErrorMessage"],
           on: {
@@ -189,6 +209,16 @@ export const verifyCodeMachine = (phone) => {
             },
           },
           exit: ["clearErrorMessage"],
+        },
+        done: {
+          type: "final",
+          entry: () => {
+            // console.log("ARRIVED THE FINAL STATE ----->> DONE");
+            navigate("/thank-you");
+          },
+        },
+        dbError: {
+          entry: () => navigate("/app-error"),
         },
       },
     },

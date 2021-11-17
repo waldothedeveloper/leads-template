@@ -16,32 +16,37 @@ const handler = (req, res) => {
       return res.status(404).json({ message: "This endpoint requires a POST" });
     }
 
-    const data = req.body;
+    const recordID = req.body;
 
-    if (!data) {
-      return res.status(500).json({ error: "There isn't any data." });
+    if (!recordID) {
+      return res.status(500).json({
+        error: "There isn't any data. Please provide a valid record ID",
+      });
     }
 
     // paste below this line
-    base(baseName).create(
+    base(baseName).update(
       [
         {
-          fields: data,
+          id: recordID,
+          fields: {
+            Verified: "YES",
+          },
         },
       ],
       (err, records) => {
         if (err) {
           return res.status(500).json({
-            message: "There was an error trying to save the record",
+            status: 500,
+            message: `There was an error trying to update the record ${recordID}`,
             error: err,
           });
         }
 
-        const newLeadID = records.map((record) => record.getId());
-
         return res.status(200).json({
-          message: "New lead saved on database",
-          recordID: newLeadID[0],
+          status: 200,
+          message: "The lead has been updated on the database",
+          confirmed: records.map((record) => record.get("Verified")),
         });
       }
     );

@@ -17,15 +17,19 @@ export const saveToDB = async (data) => {
         body: JSON.stringify(data),
       })
       .then((res) => {
-        return res.json().then(() => {
+        return res.json().then((data) => {
           return navigate("/verify-code", {
             state: {
               phone: finalPhone,
+              recordID: data.recordID,
             },
           });
         });
       });
   } catch (error) {
-    // console.log("error: ", error);
+    return {
+      status: 500,
+      message: "There was an unknown error. Try again or give us a call.",
+    };
   }
 };
