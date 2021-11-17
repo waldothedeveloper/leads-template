@@ -9,6 +9,7 @@ import { useSMSverificationProcess } from "../hooks/useSMSverificationProcess";
 
 const VerifyPhoneWithCode = ({ location }) => {
   const phone = location?.state?.phone;
+  const recordID = location?.state?.recordID;
   const {
     handleOnChange,
     handleSubmit,
@@ -19,9 +20,9 @@ const VerifyPhoneWithCode = ({ location }) => {
     code,
     state,
     send,
-  } = useSMSverificationProcess(phone);
+  } = useSMSverificationProcess(phone, recordID);
 
-  return !phone ? (
+  return !phone && !recordID ? (
     <PhoneVerificationPlaceholder />
   ) : (
     <Layout>
@@ -129,6 +130,7 @@ VerifyPhoneWithCode.propTypes = {
   location: PropTypes.shape({
     state: PropTypes.shape({
       phone: PropTypes.string.isRequired,
+      recordID: PropTypes.string.isRequired,
     }),
   }),
 };

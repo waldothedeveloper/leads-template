@@ -44,6 +44,9 @@ export const formMachine = (data) => {
           PREV: {
             actions: "prevQuestion",
           },
+          UPDATEREF: {
+            actions: assign({ ref: (_, event) => event }),
+          },
         },
       },
       validating: {
