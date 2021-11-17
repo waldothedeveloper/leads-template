@@ -17,11 +17,11 @@ export const saveToDB = async (data) => {
         body: JSON.stringify(data),
       })
       .then((res) => {
-        return res.json().then((data) => {
+        return res.json().then((response) => {
           return navigate("/verify-code", {
             state: {
               phone: finalPhone,
-              recordID: data.recordID,
+              recordID: response.recordID,
             },
           });
         });
