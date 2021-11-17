@@ -136,6 +136,7 @@ SEO.propTypes = {
     width: PropTypes.number.isRequired,
   }),
   pathname: PropTypes.string,
+  defaultImage: PropTypes.string,
 };
 
 export default SEO;
