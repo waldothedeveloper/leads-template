@@ -3,19 +3,8 @@ import React from "react";
 // import { useTermsOfUse } from "../../hooks/useTermsOfUse";
 
 const navLinks = [
-  {
-    id: 1,
-    name: "Do not sell my Info",
-    href: "https://www.originotes.com/do-not-sell-my-info",
-  },
-  { id: 2, name: "Help", href: "https://www.originotes.com/help" },
-  {
-    id: 3,
-    name: "Join as a Pro",
-    href: "https://www.originotes.com/join-as-a-pro",
-  },
-  { id: 4, name: "Privacy Policy", href: "/privacy-policy" },
-  { id: 5, name: "Terms of Use", href: "/terms-of-use" },
+  { id: 1, name: "Privacy Policy", href: "/privacy-policy" },
+  { id: 2, name: "Terms of Use", href: "/terms-of-use" },
 ];
 
 export const Footer = () => {
