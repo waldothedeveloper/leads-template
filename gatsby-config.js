@@ -23,6 +23,14 @@ module.exports = {
   plugins: [
     `gatsby-plugin-advanced-sitemap`,
     {
+      resolve: "gatsby-plugin-robots-txt",
+      options: {
+        host: "https://www.acfix.today",
+        sitemap: "https://www.acfix.today/sitemap.xml",
+        policy: [{ userAgent: "*", allow: "/" }],
+      },
+    },
+    {
       resolve: "gatsby-source-contentful",
       options: {
         accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
