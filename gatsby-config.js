@@ -21,6 +21,7 @@ module.exports = {
     ],
   },
   plugins: [
+    `gatsby-plugin-advanced-sitemap`,
     {
       resolve: "gatsby-source-contentful",
       options: {
@@ -50,7 +51,6 @@ module.exports = {
       },
     },
     "gatsby-plugin-react-helmet",
-    "gatsby-plugin-sitemap",
     {
       resolve: "gatsby-plugin-manifest",
       options: {
