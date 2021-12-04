@@ -43,7 +43,6 @@ const ThankYou = () => {
               </ul>
             </div>
           </nav> */}
-
           <div className="relative md:mt-16">
             <div
               aria-hidden="true"
