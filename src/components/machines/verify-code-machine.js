@@ -206,6 +206,7 @@ export const verifyCodeMachine = (phone, recordID) => {
           type: "final",
           entry: () => {
             // console.log("ARRIVED THE FINAL STATE ----->> DONE");
+            //! INITIATE THE CALL FLOW TO CLIENT
             navigate("/thank-you");
           },
         },
